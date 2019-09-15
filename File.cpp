@@ -15,18 +15,22 @@ File::File() {
     printf("%s\n", "No se pudo abrir el archivo");
   }
 }
-
+// FUNCION DE MAS DE 15 LINEAS *********************************************
 int File::readNumber() {
   int returnValue = 0;
   if (this -> file.eof()) {
     returnValue = END_OF_FILE;
   } else {
-    char num[4];
+    char* num = new char [4];
     file.read(num, 4);
     uint32_t number;
-    memcpy(&number, num, sizeof(num));
+    memcpy(&number, num, sizeof(char) * 4);
     number = ntohl(number);
-    returnValue = number;
+    if (file.eof()) {
+      returnValue = END_OF_FILE;
+    } else {
+      returnValue = number;
+    }
   }
   return returnValue;
 }
