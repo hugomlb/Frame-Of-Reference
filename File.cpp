@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 using namespace std;
 #define END_OF_FILE -1
+#define OK 0
 
 File::File() {
   this -> file = ifstream ("alot", ios::in|ios::binary);
@@ -15,22 +16,27 @@ File::File() {
     printf("%s\n", "No se pudo abrir el archivo");
   }
 }
-// FUNCION DE MAS DE 15 LINEAS *********************************************
+
 int File::readNumber() {
-  int returnValue = 0;
-  if (this -> file.eof()) {
-    returnValue = END_OF_FILE;
-  } else {
+  int returnValue = isEOF();
+  if (returnValue == OK) {
     char* num = new char [4];
     file.read(num, 4);
     uint32_t number;
     memcpy(&number, num, sizeof(char) * 4);
     number = ntohl(number);
-    if (file.eof()) {
-      returnValue = END_OF_FILE;
-    } else {
+    returnValue = isEOF();
+    if (returnValue == OK) {
       returnValue = number;
     }
+  }
+  return returnValue;
+}
+
+int File::isEOF() {
+  int returnValue = OK;
+  if (file.eof()) {
+    returnValue = END_OF_FILE;
   }
   return returnValue;
 }

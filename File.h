@@ -6,6 +6,7 @@ class File {
   private:
     std::ifstream file;
 
+    int isEOF();
   public:
 
     File();
