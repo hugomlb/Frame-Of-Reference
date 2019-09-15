@@ -1,12 +1,13 @@
 #ifndef _FILE_COMPRESOR_H_
 #define  _FILE_COMPRESOR_H_
 #include "File.h"
+#include "Block.h"
 class FileCompressor {
 
   private:
 
-    File* inFIle;
-    int numbsPerBlock;
+    File* inFile;
+    Block* block;
 
 
     void findMinAndMax();

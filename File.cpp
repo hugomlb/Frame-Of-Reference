@@ -24,6 +24,7 @@ int File::readNumber() {
     file.read(num, 4);
     uint32_t number;
     memcpy(&number, num, sizeof(char) * 4);
+    delete[] num;
     number = ntohl(number);
     returnValue = isEOF();
     if (returnValue == OK) {
