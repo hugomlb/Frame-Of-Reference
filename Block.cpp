@@ -1,10 +1,14 @@
 #include "Block.h"
 #include <algorithm>
+#include <iostream>
 using namespace std;
+#define MIN_VALUE 0
+#define MAX_VALUE 0xffffffff
+
 
 Block::Block(int amountOfNumbs) {
-  minNumb = 0xffffffff;
-  maxNumb = 0;
+  minNumb = MAX_VALUE;
+  maxNumb = MIN_VALUE;
   numbs.resize(amountOfNumbs);
   iterator = numbs.begin();
 }
@@ -14,7 +18,6 @@ void Block::addNumber(int numbToAdd) {
     updateMin(numbToAdd);
     updateMax(numbToAdd);
     *iterator = numbToAdd;
-    cout << hex << *iterator << endl;//BORRAR LUEGO
     iterator ++;
   }
 }
@@ -31,7 +34,23 @@ void Block::updateMin(unsigned int numberAdded) {
   }
 }
 
-Block::~Block(){
-  cout << "Minimo: " << hex << minNumb << endl;
-  cout << "Maxima: " << hex << maxNumb << endl;
+bool Block::hasSpace() {
+  bool answer = false;
+  if (iterator < numbs.end()) {
+    answer = true;
+  }
+  return answer;
+}
+
+void Block::sustractMin() {
+  maxNumb = maxNumb - minNumb;
+  for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
+    *iterator = *iterator - minNumb;
+    cout << hex << *iterator << endl; //BORRAR***************************************
+  }
+}
+
+Block::~Block() {
+  cout << "Min: " << hex << minNumb << endl; //BORRAR****************************
+  cout << "Max: " << hex << maxNumb << endl; //BORRAR*****************************
 }

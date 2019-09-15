@@ -9,8 +9,11 @@ FileCompressor::FileCompressor(File* aFile, int numbsPerBlock) {
 }
 
 void FileCompressor::compress() {
-  int x = inFile -> readNumber();
-  block -> addNumber(x);
+  while (block -> hasSpace()) {
+    int x = inFile -> readNumber();
+    block -> addNumber(x);
+  }
+  block -> sustractMin();
 }
 
 FileCompressor::~FileCompressor() {

@@ -1,6 +1,5 @@
 #ifndef _BLOCK_H_
 #define  _BLOCK_H_
-#include <iostream> //BORRAR CON PRINTF
 #include <vector>
 
 class Block {
@@ -9,8 +8,8 @@ class Block {
 
     unsigned int minNumb;
     unsigned int maxNumb;
-    std::vector<int>::iterator iterator;
-    std::vector<int> numbs;
+    std::vector<unsigned int>::iterator iterator;
+    std::vector<unsigned int> numbs;
 
     void updateMax(unsigned int numberAdded);
 
@@ -21,6 +20,10 @@ class Block {
     Block(int amountOfNumbs);
 
     void addNumber(int numbToAdd);
+
+    bool hasSpace();
+
+    void sustractMin();
 
     ~Block();
 
