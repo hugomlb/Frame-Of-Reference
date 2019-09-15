@@ -1,6 +1,7 @@
 #include "Block.h"
 #include <algorithm>
 #include <iostream>
+#include "BitBlock.h"
 using namespace std;
 #define MIN_VALUE 0
 #define MAX_VALUE 0xffffffff
@@ -46,11 +47,10 @@ void Block::sustractMin() {
   maxNumb = maxNumb - minNumb;
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     *iterator = *iterator - minNumb;
-    cout << hex << *iterator << endl; //BORRAR***************************************
   }
+  BitBlock bits(minNumb, maxNumb);
 }
 
 Block::~Block() {
-  cout << "Min: " << hex << minNumb << endl; //BORRAR****************************
-  cout << "Max: " << hex << maxNumb << endl; //BORRAR*****************************
+
 }

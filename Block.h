@@ -15,6 +15,7 @@ class Block {
 
     void updateMin(unsigned int numberAdded);
 
+
   public:
 
     Block(int amountOfNumbs);
