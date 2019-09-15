@@ -3,8 +3,8 @@
 #include <fstream>
 using namespace std;
 
-Reader::Reader() {
-
+Reader::Reader(File* aFile) {
+  this -> inFIle = aFile;
 }
 
 Reader::~Reader() {
