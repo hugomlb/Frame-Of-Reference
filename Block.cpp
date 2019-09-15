@@ -3,7 +3,7 @@
 using namespace std;
 
 Block::Block(int amountOfNumbs) {
-  minNumb = 0;
+  minNumb = 0xffffffff;
   maxNumb = 0;
   numbs.resize(amountOfNumbs);
   iterator = numbs.begin();
@@ -11,10 +11,27 @@ Block::Block(int amountOfNumbs) {
 
 void Block::addNumber(int numbToAdd) {
   if (iterator < numbs.end()){
-    minNumb = min(minNumb, numbToAdd);
-    maxNumb = max(maxNumb, numbToAdd);
+    updateMin(numbToAdd);
+    updateMax(numbToAdd);
     *iterator = numbToAdd;
-    cout << *iterator << " ";//BORRAR LUEGO
+    cout << hex << *iterator << endl;//BORRAR LUEGO
     iterator ++;
   }
+}
+
+void Block::updateMax(unsigned int numberAdded) {
+  if (maxNumb < numberAdded) {
+    maxNumb = numberAdded;
+  }
+}
+
+void Block::updateMin(unsigned int numberAdded) {
+  if (minNumb > numberAdded) {
+    minNumb = numberAdded;
+  }
+}
+
+Block::~Block(){
+  cout << "Minimo: " << hex << minNumb << endl;
+  cout << "Maxima: " << hex << maxNumb << endl;
 }

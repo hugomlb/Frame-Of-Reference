@@ -14,5 +14,5 @@ void FileCompressor::compress() {
 }
 
 FileCompressor::~FileCompressor() {
-
+  delete block;
 }

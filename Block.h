@@ -7,10 +7,14 @@ class Block {
 
   private:
 
-    int minNumb;
-    int maxNumb;
+    unsigned int minNumb;
+    unsigned int maxNumb;
     std::vector<int>::iterator iterator;
     std::vector<int> numbs;
+
+    void updateMax(unsigned int numberAdded);
+
+    void updateMin(unsigned int numberAdded);
 
   public:
 
