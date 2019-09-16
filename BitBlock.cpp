@@ -1,6 +1,8 @@
 #include "BitBlock.h"
 #include <iostream>
 #include <bitset>
+#include "OutFile.h"
+#include <netinet/in.h>
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
@@ -30,8 +32,13 @@ void BitBlock::addNumb(unsigned numbToAdd) {
   cout << "String: " << bitNumbs << endl;
 }
 
-void BitBlock::writeTo(OutFile *outFile) {
-
+void BitBlock::writeTo() {
+  OutFile outFile;
+  reference = ntohl(reference);
+  outFile.write((char*) &reference, 4);
+  outFile.write((char*) &bitsPerNumb, 1);
+  //unsigned x = stoul(bitNumbs, nullptr, 2);
+  //cout <<x << endl;
 }
 
 BitBlock::~BitBlock() {

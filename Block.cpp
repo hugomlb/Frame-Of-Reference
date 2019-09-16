@@ -8,10 +8,8 @@ using namespace std;
 
 
 Block::Block(int amountOfNumbs) {
-  minNumb = MAX_VALUE;
-  maxNumb = MIN_VALUE;
   numbs.resize(amountOfNumbs);
-  iterator = numbs.begin();
+  reset();
 }
 
 void Block::addNumber(unsigned numbToAdd) {
@@ -60,6 +58,7 @@ void Block::subtractMin() {
   bits.addNumb(numbs[1]);
   bits.addNumb(numbs[2]);
   bits.addNumb(numbs[3]);
+  bits.writeTo();
 }
 
 Block::~Block() {

@@ -9,7 +9,7 @@ using namespace std;
 #define OK 0
 
 InFile::InFile() {
-  this -> file = ifstream ("alot", ios::in|ios::binary);
+  this -> file = ifstream("alot", ios::in|ios::binary);
   if (this -> file.is_open()) {
     this -> file.seekg(0);
   } else {
@@ -43,5 +43,5 @@ int InFile::isEOF() {
 }
 
 InFile::~InFile(){
-  this -> file.close();
+  file.close();
 }
