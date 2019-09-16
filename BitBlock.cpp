@@ -1,6 +1,5 @@
 #include "BitBlock.h"
 #include <iostream>
-#include <string>
 #include <bitset>
 using namespace std;
 #define MAX_BIT_QUANTITY 32
@@ -8,14 +7,13 @@ using namespace std;
 BitBlock::BitBlock(unsigned int aReference, unsigned int maxNumb, int amountOfNumbs) {
   bitsPerNumb = calculateBitsPerNumb(maxNumb);
   reference = aReference;
-  numbsInBits.resize(amountOfNumbs);
-  iterator = numbsInBits.begin();
+  bitNumbs.resize(bitsPerNumb * amountOfNumbs);
 }
 
-int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
+unsigned int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
   bitset<MAX_BIT_QUANTITY>  bits (maxNumb);
   int inBit = 0;
-  int index = MAX_BIT_QUANTITY;
+  unsigned int index = MAX_BIT_QUANTITY;
   while (inBit == 0 && index > 0) {
     index --;
     inBit = bits[index];
@@ -25,11 +23,15 @@ int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
 }
 
 void BitBlock::addNumb(unsigned int numbToAdd) {
-  if (iterator < numbsInBits.end()) {
-    *iterator = bitset<MAX_BIT_QUANTITY> (numbToAdd);
-    cout << *iterator << endl;
-    iterator ++;
-  }
+  bitset<MAX_BIT_QUANTITY>  bitNumber(numbToAdd);
+  cout << bitNumber << endl;
+  string auxString = bitNumber.to_string();
+  bitNumbs.append(auxString, 20);
+  cout << "String: " << bitNumbs << endl;
+}
+
+void BitBlock::writeTo(OutFile *outFile) {
+
 }
 
 BitBlock::~BitBlock() {

@@ -1,23 +1,23 @@
 #ifndef _BIT_BLOCK_H_
 #define _BIT_BLOCK_H_
-
-#include <vector>
-#include <bitset>
+#include <string>
+#include "OutFile.h"
 class BitBlock {
   private:
 
-    int bitsPerNumb;
+    unsigned int bitsPerNumb;
     unsigned int reference;
-    std::vector<std::bitset<32>>::iterator iterator;
-    std::vector<std::bitset<32>> numbsInBits;
+    std::string bitNumbs;
 
-    int calculateBitsPerNumb(unsigned  int maxNumb);
+    unsigned int calculateBitsPerNumb(unsigned  int maxNumb);
 
   public:
 
     BitBlock(unsigned  int aReference, unsigned int maxNumb, int amountOfNumbs);
 
     void addNumb(unsigned int numbToAdd);
+
+    void writeTo(OutFile* outFile);
 
     ~BitBlock();
 
