@@ -1,15 +1,15 @@
 #ifndef _BITBLOCK_H_
 #define _BITBLOCK_H_
 
-#include <bitset>
 #include <vector>
-
+#include <bitset>
 class BitBlock {
   private:
-  
+
     int bitsPerNumb;
     unsigned int reference;
-
+    std::vector<std::bitset<32>>::iterator iterator;
+    std::vector<std::bitset<32>> numbsInBits;
 
     int calculateBitsPerNumb(unsigned  int maxNumb);
 
