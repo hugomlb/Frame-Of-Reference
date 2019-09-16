@@ -6,8 +6,7 @@
 
 class BitBlock {
   private:
-
-    std::vector<unsigned int> numbs;
+  
     int bitsPerNumb;
     unsigned int reference;
 
