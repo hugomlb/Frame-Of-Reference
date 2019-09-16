@@ -1,6 +1,7 @@
 #ifndef _FILE_H_
 #define  _FILE_H_
 #include <fstream>
+#include "Block.h"
 class File {
 
   private:
@@ -11,7 +12,7 @@ class File {
 
     File();
 
-    int readNumber();
+    int readNumberTo(Block* block);
 
     ~File();
 };

@@ -17,7 +17,7 @@ File::File() {
   }
 }
 
-int File::readNumber() {
+int File::readNumberTo(Block *block) {
   int returnValue = isEOF();
   if (returnValue == OK) {
     char* num = new char [4];
@@ -28,7 +28,7 @@ int File::readNumber() {
     number = ntohl(number);
     returnValue = isEOF();
     if (returnValue == OK) {
-      returnValue = number;
+      block -> addNumber(number);
     }
   }
   return returnValue;

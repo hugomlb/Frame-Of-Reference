@@ -14,7 +14,7 @@ Block::Block(int amountOfNumbs) {
   iterator = numbs.begin();
 }
 
-void Block::addNumber(int numbToAdd) {
+void Block::addNumber(unsigned int numbToAdd) {
   if (iterator < numbs.end()){
     updateMin(numbToAdd);
     updateMax(numbToAdd);

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+#define END_OF_FILE -1
+#define OK 0
 
 FileCompressor::FileCompressor(File* aFile, int numbsPerBlock) {
   this -> inFile = aFile;
@@ -9,9 +11,9 @@ FileCompressor::FileCompressor(File* aFile, int numbsPerBlock) {
 }
 
 void FileCompressor::compress() {
-  while (block -> hasSpace()) {
-    int x = inFile -> readNumber();
-    block -> addNumber(x);
+  int fileState = OK;
+  while (block -> hasSpace() && fileState == OK) {
+    fileState = inFile -> readNumberTo(block);
   }
   block -> sustractMin();
 }

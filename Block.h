@@ -20,7 +20,7 @@ class Block {
 
     Block(int amountOfNumbs);
 
-    void addNumber(int numbToAdd);
+    void addNumber(unsigned int numbToAdd);
 
     bool hasSpace();
 

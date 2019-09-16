@@ -27,6 +27,7 @@ int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
 void BitBlock::addNumb(unsigned int numbToAdd) {
   if (iterator < numbsInBits.end()) {
     *iterator = bitset<MAX_BIT_QUANTITY> (numbToAdd);
+    cout << *iterator << endl;
     iterator ++;
   }
 }
