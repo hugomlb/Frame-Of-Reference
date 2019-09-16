@@ -36,6 +36,8 @@ void Block::updateMin(unsigned numberAdded) {
 }
 void Block::reset() {
   iterator = numbs.begin();
+  minNumb = MAX_VALUE;
+  maxNumb = MIN_VALUE;
 }
 
 bool Block::hasSpace() {
@@ -51,6 +53,8 @@ void Block::subtractMin() {
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     *iterator = *iterator - minNumb;
   }
+  cout << "Min: " << hex << minNumb << endl;
+  cout << "Max: " << hex << maxNumb << endl;
   BitBlock bits(minNumb, maxNumb, 4);
   bits.addNumb(numbs[0]);
   bits.addNumb(numbs[1]);

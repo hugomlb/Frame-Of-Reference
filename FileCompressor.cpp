@@ -16,6 +16,7 @@ void FileCompressor::compress() {
     fileState = inFile -> readNumberTo(block);
   }
   if (!(block -> hasSpace())) {
+    cout << "NUEVO BLOQUE: " << endl;
     block -> subtractMin();
     block -> reset();
     compress();
