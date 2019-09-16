@@ -1,22 +1,31 @@
 #include "BitBlock.h"
 #include <iostream>
-#include <bitset>
+#include <string>
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
-BitBlock::BitBlock(unsigned int aReference, unsigned int maxNumb) {
-  calculateBitsPerNumb(maxNumb);
+BitBlock::BitBlock(unsigned int aReference, unsigned int maxNumb, int amountOfNumbs) {
+  bitsPerNumb = calculateBitsPerNumb(maxNumb);
+  reference = aReference;
+
 }
 
-void BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
+int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
   bitset<MAX_BIT_QUANTITY>  bits (maxNumb);
   int inBit = 0;
-  bitsPerNumb = MAX_BIT_QUANTITY;
-  while (inBit == 0 && bitsPerNumb > 0) {
-    bitsPerNumb --;
-    inBit = bits[bitsPerNumb];
+  int index = MAX_BIT_QUANTITY;
+  while (inBit == 0 && index > 0) {
+    index --;
+    inBit = bits[index];
   }
-  cout << bitsPerNumb << endl;
+  index ++;
+  return index;
+}
+
+void BitBlock::addNumb(unsigned int numbToAdd) {
+  cout << hex << numbToAdd << endl;
+  bitset<MAX_BIT_QUANTITY> bitNumb(numbToAdd);
+
 }
 
 BitBlock::~BitBlock() {

@@ -48,7 +48,11 @@ void Block::sustractMin() {
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     *iterator = *iterator - minNumb;
   }
-  BitBlock bits(minNumb, maxNumb);
+  BitBlock bits(minNumb, maxNumb, 4);
+  bits.addNumb(numbs[0]);
+  bits.addNumb(numbs[1]);
+  bits.addNumb(numbs[2]);
+  bits.addNumb(numbs[3]);
 }
 
 Block::~Block() {
