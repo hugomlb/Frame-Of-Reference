@@ -26,10 +26,9 @@ unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
 
 void BitBlock::addNumb(unsigned numbToAdd) {
   bitset<MAX_BIT_QUANTITY>  bitNumber(numbToAdd);
-  cout << bitNumber << endl;
+  cout << numbToAdd << endl;
   string auxString = bitNumber.to_string();
   bitNumbs.append(auxString, MAX_BIT_QUANTITY - (int) bitsPerNumb);
-  cout << "String: " << bitNumbs << endl;
 }
 
 void BitBlock::writeTo() {
@@ -37,8 +36,6 @@ void BitBlock::writeTo() {
   reference = ntohl(reference);
   outFile.write((char*) &reference, 4);
   outFile.write((char*) &bitsPerNumb, 1);
-  //unsigned x = stoul(bitNumbs, nullptr, 2);
-  //cout <<x << endl;
 }
 
 BitBlock::~BitBlock() {

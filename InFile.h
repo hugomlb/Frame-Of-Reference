@@ -6,11 +6,13 @@ class InFile {
 
   private:
     std::ifstream file;
-
+    unsigned lastRead;
     int isEOF();
   public:
 
     InFile();
+
+    int readNumbsTo(Block* block, int amountOfNumb);
 
     int readNumberTo(Block* block);
 

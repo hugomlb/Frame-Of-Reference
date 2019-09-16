@@ -12,14 +12,13 @@ FileCompressor::FileCompressor(InFile* aFile, int numbsPerBlock) {
 
 void FileCompressor::compress() {
   int fileState = OK;
-  while (block -> hasSpace() && fileState == OK) {
-    fileState = inFile -> readNumberTo(block);
-  }
-  if (!(block -> hasSpace())) {
-    cout << "NUEVO BLOQUE: " << endl;
-    block -> subtractMin();
-    block -> reset();
-    compress();
+  while (fileState == OK) {
+    fileState = inFile->readNumbsTo(block, 4);
+    if (!(block->hasSpace())) {
+      cout << "NUEVO BLOQUE: " << endl;
+      block->subtractMin();
+      block->reset();
+    }
   }
 }
 

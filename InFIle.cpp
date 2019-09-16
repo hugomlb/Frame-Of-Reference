@@ -10,11 +10,25 @@ using namespace std;
 
 InFile::InFile() {
   this -> file = ifstream("alot", ios::in|ios::binary);
+  lastRead = 0;
   if (this -> file.is_open()) {
     this -> file.seekg(0);
   } else {
     printf("%s\n", "No se pudo abrir el archivo");
   }
+}
+
+int InFile::readNumbsTo(Block *block, int amountOfNumb) {
+  int fileState = isEOF();
+  while (block -> hasSpace() && fileState == OK) {
+    fileState = readNumberTo(block);
+    cout << "Poniendo: " << lastRead << endl;
+  }
+  while (block -> hasSpace()) {
+    block ->addNumber(lastRead);
+    cout << "Poniendo: " << lastRead << endl;
+  }
+  return  fileState;
 }
 
 int InFile::readNumberTo(Block *block) {
@@ -28,7 +42,8 @@ int InFile::readNumberTo(Block *block) {
     number = ntohl(number);
     returnValue = isEOF();
     if (returnValue == OK) {
-      block -> addNumber(number);
+      lastRead = number;
+      block -> addNumber(lastRead);
     }
   }
   return returnValue;
