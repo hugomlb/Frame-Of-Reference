@@ -8,6 +8,7 @@ class FileCompressor {
 
     InFile* inFile;
     Block* block;
+    int numbsPerBlock;
 
   public:
 

@@ -6,14 +6,15 @@ using namespace std;
 #define OK 0
 
 FileCompressor::FileCompressor(InFile* aFile, int numbsPerBlock) {
-  this -> inFile = aFile;
+  inFile = aFile;
+  this -> numbsPerBlock = numbsPerBlock;
   block = new Block(numbsPerBlock);
 }
 
 void FileCompressor::compress() {
   int fileState = OK;
   while (fileState == OK) {
-    fileState = inFile->readNumbsTo(block, 4);
+    fileState = inFile->readNumbsTo(block, numbsPerBlock);
     if (!(block->hasSpace())) {
       block->subtractMin();
       block->reset();

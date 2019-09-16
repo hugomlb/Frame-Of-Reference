@@ -47,17 +47,13 @@ bool Block::hasSpace() {
 }
 
 void Block::subtractMin() {
-  maxNumb = maxNumb - minNumb;
-  for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
-    *iterator = *iterator - minNumb;
-  }
   cout << "Min: " << hex << minNumb << endl;
   cout << "Max: " << hex << maxNumb << endl;
   BitBlock bits(minNumb, maxNumb, 4);
-  bits.addNumb(numbs[0]);
-  bits.addNumb(numbs[1]);
-  bits.addNumb(numbs[2]);
-  bits.addNumb(numbs[3]);
+  for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
+    bits.addNumb(*iterator - minNumb);
+  }
+
   bits.writeTo();
 }
 
