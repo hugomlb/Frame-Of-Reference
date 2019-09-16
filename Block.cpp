@@ -34,6 +34,9 @@ void Block::updateMin(unsigned numberAdded) {
     minNumb = numberAdded;
   }
 }
+void Block::reset() {
+  iterator = numbs.begin();
+}
 
 bool Block::hasSpace() {
   bool answer = false;

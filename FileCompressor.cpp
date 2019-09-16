@@ -15,7 +15,11 @@ void FileCompressor::compress() {
   while (block -> hasSpace() && fileState == OK) {
     fileState = inFile -> readNumberTo(block);
   }
-  block -> subtractMin();
+  if (!(block -> hasSpace())) {
+    block -> subtractMin();
+    block -> reset();
+    compress();
+  }
 }
 
 FileCompressor::~FileCompressor() {

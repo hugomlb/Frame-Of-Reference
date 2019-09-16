@@ -22,6 +22,8 @@ class Block {
 
     void addNumber(unsigned numbToAdd);
 
+    void reset();
+
     bool hasSpace();
 
     void subtractMin();
