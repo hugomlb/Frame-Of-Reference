@@ -1,4 +1,4 @@
-#include "File.h"
+#include "InFile.h"
 #include <iostream>
 #include <fstream>
 #include <cstdint>
@@ -8,7 +8,7 @@ using namespace std;
 #define END_OF_FILE -1
 #define OK 0
 
-File::File() {
+InFile::InFile() {
   this -> file = ifstream ("alot", ios::in|ios::binary);
   if (this -> file.is_open()) {
     this -> file.seekg(0);
@@ -17,7 +17,7 @@ File::File() {
   }
 }
 
-int File::readNumberTo(Block *block) {
+int InFile::readNumberTo(Block *block) {
   int returnValue = isEOF();
   if (returnValue == OK) {
     char* num = new char [4];
@@ -34,7 +34,7 @@ int File::readNumberTo(Block *block) {
   return returnValue;
 }
 
-int File::isEOF() {
+int InFile::isEOF() {
   int returnValue = OK;
   if (file.eof()) {
     returnValue = END_OF_FILE;
@@ -42,6 +42,6 @@ int File::isEOF() {
   return returnValue;
 }
 
-File::~File(){
+InFile::~InFile(){
   this -> file.close();
 }

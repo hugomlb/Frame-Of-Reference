@@ -24,7 +24,7 @@ class Block {
 
     bool hasSpace();
 
-    void sustractMin();
+    void subtractMin();
 
     ~Block();
 

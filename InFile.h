@@ -1,8 +1,8 @@
-#ifndef _FILE_H_
-#define  _FILE_H_
+#ifndef _IN_FILE_H_
+#define  _IN_FILE_H_
 #include <fstream>
 #include "Block.h"
-class File {
+class InFile {
 
   private:
     std::ifstream file;
@@ -10,11 +10,11 @@ class File {
     int isEOF();
   public:
 
-    File();
+    InFile();
 
     int readNumberTo(Block* block);
 
-    ~File();
+    ~InFile();
 };
 
 #endif

@@ -43,7 +43,7 @@ bool Block::hasSpace() {
   return answer;
 }
 
-void Block::sustractMin() {
+void Block::subtractMin() {
   maxNumb = maxNumb - minNumb;
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     *iterator = *iterator - minNumb;

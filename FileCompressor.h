@@ -1,12 +1,12 @@
 #ifndef _FILE_COMPRESOR_H_
 #define  _FILE_COMPRESOR_H_
-#include "File.h"
+#include "InFile.h"
 #include "Block.h"
 class FileCompressor {
 
   private:
 
-    File* inFile;
+    InFile* inFile;
     Block* block;
 
 
@@ -18,7 +18,7 @@ class FileCompressor {
 
   public:
 
-    FileCompressor(File* aFile, int numbsPerBlock);
+    FileCompressor(InFile* aFile, int numbsPerBlock);
 
     void compress();
 

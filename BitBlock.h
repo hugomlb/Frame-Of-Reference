@@ -1,5 +1,5 @@
-#ifndef _BITBLOCK_H_
-#define _BITBLOCK_H_
+#ifndef _BIT_BLOCK_H_
+#define _BIT_BLOCK_H_
 
 #include <vector>
 #include <bitset>

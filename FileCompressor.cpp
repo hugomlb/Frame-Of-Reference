@@ -5,7 +5,7 @@ using namespace std;
 #define END_OF_FILE -1
 #define OK 0
 
-FileCompressor::FileCompressor(File* aFile, int numbsPerBlock) {
+FileCompressor::FileCompressor(InFile* aFile, int numbsPerBlock) {
   this -> inFile = aFile;
   block = new Block(numbsPerBlock);
 }
@@ -15,7 +15,7 @@ void FileCompressor::compress() {
   while (block -> hasSpace() && fileState == OK) {
     fileState = inFile -> readNumberTo(block);
   }
-  block -> sustractMin();
+  block -> subtractMin();
 }
 
 FileCompressor::~FileCompressor() {
