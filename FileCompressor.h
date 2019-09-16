@@ -9,13 +9,6 @@ class FileCompressor {
     InFile* inFile;
     Block* block;
 
-
-    void findMinAndMax();
-
-    void sustractReference();
-
-    int getNumOfBitsOfBlock();
-
   public:
 
     FileCompressor(InFile* aFile, int numbsPerBlock);

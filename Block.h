@@ -6,21 +6,21 @@ class Block {
 
   private:
 
-    unsigned int minNumb;
-    unsigned int maxNumb;
-    std::vector<unsigned int>::iterator iterator;
-    std::vector<unsigned int> numbs;
+    unsigned minNumb;
+    unsigned maxNumb;
+    std::vector<unsigned>::iterator iterator;
+    std::vector<unsigned> numbs;
 
-    void updateMax(unsigned int numberAdded);
+    void updateMax(unsigned numberAdded);
 
-    void updateMin(unsigned int numberAdded);
+    void updateMin(unsigned numberAdded);
 
 
   public:
 
     Block(int amountOfNumbs);
 
-    void addNumber(unsigned int numbToAdd);
+    void addNumber(unsigned numbToAdd);
 
     bool hasSpace();
 

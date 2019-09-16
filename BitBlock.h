@@ -9,13 +9,13 @@ class BitBlock {
     unsigned int reference;
     std::string bitNumbs;
 
-    unsigned int calculateBitsPerNumb(unsigned  int maxNumb);
+    unsigned int calculateBitsPerNumb(unsigned maxNumb);
 
   public:
 
-    BitBlock(unsigned  int aReference, unsigned int maxNumb, int amountOfNumbs);
+    BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
 
-    void addNumb(unsigned int numbToAdd);
+    void addNumb(unsigned numbToAdd);
 
     void writeTo(OutFile* outFile);
 

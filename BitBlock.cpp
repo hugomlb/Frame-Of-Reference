@@ -4,16 +4,16 @@
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
-BitBlock::BitBlock(unsigned int aReference, unsigned int maxNumb, int amountOfNumbs) {
+BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   bitsPerNumb = calculateBitsPerNumb(maxNumb);
   reference = aReference;
   bitNumbs.resize(bitsPerNumb * amountOfNumbs);
 }
 
-unsigned int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
+unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
   bitset<MAX_BIT_QUANTITY>  bits (maxNumb);
   int inBit = 0;
-  unsigned int index = MAX_BIT_QUANTITY;
+  unsigned index = MAX_BIT_QUANTITY;
   while (inBit == 0 && index > 0) {
     index --;
     inBit = bits[index];
@@ -22,11 +22,11 @@ unsigned int BitBlock::calculateBitsPerNumb(unsigned int maxNumb) {
   return index;
 }
 
-void BitBlock::addNumb(unsigned int numbToAdd) {
+void BitBlock::addNumb(unsigned numbToAdd) {
   bitset<MAX_BIT_QUANTITY>  bitNumber(numbToAdd);
   cout << bitNumber << endl;
   string auxString = bitNumber.to_string();
-  bitNumbs.append(auxString, 20);
+  bitNumbs.append(auxString, MAX_BIT_QUANTITY - (int) bitsPerNumb);
   cout << "String: " << bitNumbs << endl;
 }
 
