@@ -11,6 +11,7 @@ using namespace std;
 InFile::InFile() {
   this -> file = ifstream("alot", ios::in|ios::binary);
   lastRead = 0;
+  lectureNum = 0;
   if (this -> file.is_open()) {
     this -> file.seekg(0);
   } else {
@@ -20,33 +21,34 @@ InFile::InFile() {
 
 int InFile::readNumbsTo(Block *block, int amountOfNumb) {
   int fileState = isEOF();
+  wasRead = false;
+  cout << "Nuevo Bloque: " << endl;
   while (block -> hasSpace() && fileState == OK) {
     fileState = readNumberTo(block);
-    cout << "Poniendo: " << lastRead << endl;
   }
-  while (block -> hasSpace()) {
+  while (block -> hasSpace() && wasRead) {
     block ->addNumber(lastRead);
-    cout << "Poniendo: " << lastRead << endl;
   }
   return  fileState;
 }
 
 int InFile::readNumberTo(Block *block) {
-  int returnValue = isEOF();
-  if (returnValue == OK) {
+  int fileState = isEOF();
+  if (fileState == OK) {
     char* num = new char [4];
     file.read(num, 4);
     uint32_t number;
     memcpy(&number, num, sizeof(char) * 4);
     delete[] num;
     number = ntohl(number);
-    returnValue = isEOF();
-    if (returnValue == OK) {
+    fileState = isEOF();
+    if (fileState == OK) {
       lastRead = number;
       block -> addNumber(lastRead);
+      wasRead = true;
     }
   }
-  return returnValue;
+  return fileState;
 }
 
 int InFile::isEOF() {

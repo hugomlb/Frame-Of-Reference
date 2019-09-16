@@ -7,6 +7,8 @@ class InFile {
   private:
     std::ifstream file;
     unsigned lastRead;
+    bool wasRead;
+    int lectureNum;
     int isEOF();
   public:
 
