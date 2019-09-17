@@ -3,13 +3,15 @@
 #include <bitset>
 #include "OutFile.h"
 #include <netinet/in.h>
+#include "BitVector.h"
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
 BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   bitsPerNumb = calculateBitsPerNumb(maxNumb);
   reference = aReference;
-  bitNumbs.resize(bitsPerNumb * amountOfNumbs);
+  totalBits = bitsPerNumb * amountOfNumbs;
+  bitNumbs = new BitVector(amountOfNumbs * bitsPerNumb);
 }
 
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
@@ -25,19 +27,18 @@ unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
 }
 
 void BitBlock::addNumb(unsigned numbToAdd) {
-  bitset<MAX_BIT_QUANTITY>  bitNumber(numbToAdd);
   cout << numbToAdd << endl;
-  string auxString = bitNumber.to_string();
-  bitNumbs.append(auxString, MAX_BIT_QUANTITY - (int) bitsPerNumb);
+  bitNumbs -> addBitsFrom(bitsPerNumb, numbToAdd);
 }
 
 void BitBlock::writeTo() {
-  OutFile outFile;
+  /*OutFile outFile;
   reference = ntohl(reference);
   outFile.write((char*) &reference, 4);
   outFile.write((char*) &bitsPerNumb, 1);
+  bitNumbs -> writeTo(&outFile);*/
 }
 
 BitBlock::~BitBlock() {
-
+  delete bitNumbs;
 }
