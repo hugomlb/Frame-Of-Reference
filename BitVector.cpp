@@ -9,7 +9,6 @@ BitVector::BitVector(int amountOfBits) {
   if ((amountOfBits % 8) != 0) {
     bytesNeeded ++;
   }
-  cout << "Tengo esta cantidad de chars" << bytesNeeded << endl;
   bytes.resize(bytesNeeded);
   iterator = bytes.begin();
   inBit = 7;
@@ -17,8 +16,6 @@ BitVector::BitVector(int amountOfBits) {
 
 void BitVector::addBitsFrom(int amountOfBits, unsigned numbToAdd) {
   bitset<MAX_BIT_QUANTITY> source(numbToAdd);
-  cout << "El numero a escribir es: " << source << endl;
-  cout << "Debo escribir estos bit: " << amountOfBits << endl;
   while ( 0 < amountOfBits) {
     aux = (aux &~ (1UL << inBit)) | (source[amountOfBits - 1] << inBit);
     nextBit();
@@ -34,12 +31,11 @@ void BitVector::writeTo(OutFile *outFile) {
 
 void BitVector::addPadding() {
   if (iterator != bytes.end() && inBit != 7) {
-    while  (inBit != 0) {
+    while  (inBit >= 0) {
       aux = (aux &~ (1UL << inBit)) | (0 << inBit);
       inBit --;
     }
     bitset<8> bit (aux);
-    cout << "El Byte es: " << bit << endl;
     *iterator = aux;
   }
 }
@@ -49,7 +45,6 @@ void BitVector::nextBit() {
     inBit = 7;
     if (iterator !=  bytes.end()){
       bitset<8> bit (aux);
-      cout << "El Byte es: " << bit << endl;
       *iterator = aux;
       iterator ++;
     }
