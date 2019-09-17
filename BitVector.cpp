@@ -1,6 +1,4 @@
 #include "BitVector.h"
-
-#include <iostream>
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
@@ -17,13 +15,10 @@ BitVector::BitVector(int amountOfBits) {
 void BitVector::addBitsFrom(int amountOfBits, unsigned numbToAdd) {
   bitset<MAX_BIT_QUANTITY> source(numbToAdd);
   cout << source << endl;
-  int i = 1;
   while ( 0 < amountOfBits) {
     aux = (aux &~ (1UL << inBit)) | (source[amountOfBits - 1] << inBit);
     nextBit();
     amountOfBits --;
-    cout << "Agrege bits :" << i << endl;
-    i++;
   }
 }
 
@@ -39,7 +34,6 @@ void BitVector::nextBit() {
     *iterator = aux;
     iterator ++;
     bitset<8> bit(aux);
-    cout << "Nuevo Numero: " << bit << endl;
   } else {
     inBit --;
   }

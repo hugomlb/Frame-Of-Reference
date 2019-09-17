@@ -1,5 +1,4 @@
 #include "FileCompressor.h"
-#include <iostream>
 #include <fstream>
 using namespace std;
 #define END_OF_FILE -1

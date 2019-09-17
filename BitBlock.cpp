@@ -27,8 +27,6 @@ unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
 }
 
 void BitBlock::addNumb(unsigned numbToAdd) {
-  cout << numbToAdd << endl;
-  cout << bitsPerNumb << endl;
   bitNumbs -> addBitsFrom(bitsPerNumb, numbToAdd);
 }
 

@@ -2,7 +2,6 @@
 #define _BIT_VECTOR_H_
 
 #include <vector>
-#include <bitset>
 #include "OutFile.h"
 
 class BitVector {

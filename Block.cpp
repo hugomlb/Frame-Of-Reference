@@ -1,6 +1,4 @@
 #include "Block.h"
-#include <algorithm>
-#include <iostream>
 #include "BitBlock.h"
 using namespace std;
 #define MIN_VALUE 0
@@ -47,8 +45,6 @@ bool Block::hasSpace() {
 }
 
 void Block::subtractMin() {
-  cout << "Min: " << hex << minNumb << endl;
-  cout << "Max: " << hex << (maxNumb - minNumb) << endl;
   BitBlock bits(minNumb, (maxNumb - minNumb), 4);
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     bits.addNumb(*iterator - minNumb);
