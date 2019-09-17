@@ -7,7 +7,6 @@ class BitBlock {
 
     unsigned int bitsPerNumb;
     unsigned int reference;
-    int totalBits;
     BitVector* bitNumbs;
 
     unsigned int calculateBitsPerNumb(unsigned maxNumb);

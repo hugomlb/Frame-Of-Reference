@@ -4,6 +4,6 @@
 int main(int argc, char const *argv[]) {
   InFile file;
   OutFile outFile;
-  FileCompressor fileCompressor(&file, &outFile, 4);
+  FileCompressor fileCompressor(&file, &outFile, 3);
   fileCompressor.compress();
 }

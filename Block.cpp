@@ -45,7 +45,7 @@ bool Block::hasSpace() {
 }
 
 void Block::compress() {
-  bits =  new BitBlock(minNumb, (maxNumb - minNumb), 4);
+  bits =  new BitBlock(minNumb, (maxNumb - minNumb), numbs.size());
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     bits -> addNumb(*iterator - minNumb);
   }

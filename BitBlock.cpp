@@ -8,9 +8,12 @@ using namespace std;
 #define MAX_BIT_QUANTITY 32
 
 BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
-  bitsPerNumb = calculateBitsPerNumb(maxNumb);
+  if (maxNumb == 0) {
+    bitsPerNumb = 0;
+  } else {
+    bitsPerNumb = calculateBitsPerNumb(maxNumb);
+  }
   reference = aReference;
-  totalBits = bitsPerNumb * amountOfNumbs;
   bitNumbs = new BitVector(amountOfNumbs * bitsPerNumb);
 }
 
@@ -34,6 +37,7 @@ void BitBlock::writeTo(OutFile* outFile) {
   reference = ntohl(reference);
   outFile -> write((char*) &reference, 4);
   outFile -> write((char*) &bitsPerNumb, 1);
+  bitNumbs -> addPadding();
   bitNumbs -> writeTo(outFile);
 }
 

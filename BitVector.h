@@ -21,6 +21,8 @@ class BitVector {
 
   void writeTo(OutFile* outFile);
 
+  void addPadding();
+
   ~BitVector();
 };
 

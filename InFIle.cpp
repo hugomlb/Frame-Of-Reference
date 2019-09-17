@@ -9,7 +9,7 @@ using namespace std;
 #define OK 0
 
 InFile::InFile() {
-  this -> file = ifstream("alot", ios::in|ios::binary);
+  this -> file = ifstream("zeroblk", ios::in|ios::binary);
   lastRead = 0;
   lectureNum = 0;
   if (this -> file.is_open()) {
