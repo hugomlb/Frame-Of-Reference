@@ -30,12 +30,11 @@ void BitBlock::addNumb(unsigned numbToAdd) {
   bitNumbs -> addBitsFrom(bitsPerNumb, numbToAdd);
 }
 
-void BitBlock::writeTo() {
-  OutFile outFile;
+void BitBlock::writeTo(OutFile* outFile) {
   reference = ntohl(reference);
-  outFile.write((char*) &reference, 4);
-  outFile.write((char*) &bitsPerNumb, 1);
-  bitNumbs -> writeTo(&outFile);
+  outFile -> write((char*) &reference, 4);
+  outFile -> write((char*) &bitsPerNumb, 1);
+  bitNumbs -> writeTo(outFile);
 }
 
 BitBlock::~BitBlock() {

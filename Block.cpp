@@ -44,14 +44,17 @@ bool Block::hasSpace() {
   return answer;
 }
 
-void Block::subtractMin() {
-  BitBlock bits(minNumb, (maxNumb - minNumb), 4);
+void Block::compress() {
+  bits =  new BitBlock(minNumb, (maxNumb - minNumb), 4);
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
-    bits.addNumb(*iterator - minNumb);
+    bits -> addNumb(*iterator - minNumb);
   }
-  bits.writeTo();
+}
+
+void Block::writeTo(OutFile *outFile) {
+  bits -> writeTo(outFile);
 }
 
 Block::~Block() {
-
+  delete bits;
 }

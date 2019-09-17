@@ -18,7 +18,7 @@ class BitBlock {
 
     void addNumb(unsigned numbToAdd);
 
-    void writeTo();
+    void writeTo(OutFile *outFile);
 
     ~BitBlock();
 
