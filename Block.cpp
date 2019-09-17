@@ -53,8 +53,8 @@ void Block::compress() {
 
 void Block::writeTo(OutFile *outFile) {
   bits -> writeTo(outFile);
+  delete bits;
 }
 
 Block::~Block() {
-  delete bits;
 }

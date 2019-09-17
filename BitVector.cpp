@@ -2,6 +2,8 @@
 using namespace std;
 #define MAX_BIT_QUANTITY 32
 
+#include <bitset>
+
 BitVector::BitVector(int amountOfBits) {
   int bytesNeeded = amountOfBits / 8;
   if ((amountOfBits % 8) != 0) {
@@ -40,5 +42,4 @@ void BitVector::nextBit() {
 }
 
 BitVector::~BitVector() {
-
 }
