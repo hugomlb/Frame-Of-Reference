@@ -28,15 +28,16 @@ unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
 
 void BitBlock::addNumb(unsigned numbToAdd) {
   cout << numbToAdd << endl;
+  cout << bitsPerNumb << endl;
   bitNumbs -> addBitsFrom(bitsPerNumb, numbToAdd);
 }
 
 void BitBlock::writeTo() {
-  /*OutFile outFile;
+  OutFile outFile;
   reference = ntohl(reference);
   outFile.write((char*) &reference, 4);
   outFile.write((char*) &bitsPerNumb, 1);
-  bitNumbs -> writeTo(&outFile);*/
+  bitNumbs -> writeTo(&outFile);
 }
 
 BitBlock::~BitBlock() {

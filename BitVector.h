@@ -10,7 +10,9 @@ class BitVector {
 
   std::vector<char>::iterator iterator;
   std::vector<char> bytes;
+  char aux;
   int inBit;
+  void nextBit();
 
   public:
 
