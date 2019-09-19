@@ -6,7 +6,6 @@
 
 class Block {
   private:
-
     unsigned minNumb;
     unsigned maxNumb;
     std::vector<unsigned>::iterator iterator;
@@ -19,7 +18,6 @@ class Block {
 
 
   public:
-
     Block(int amountOfNumbs);
 
     void addNumber(unsigned numbToAdd);

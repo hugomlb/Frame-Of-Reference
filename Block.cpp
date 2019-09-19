@@ -1,6 +1,5 @@
 #include "Block.h"
 #include "BitBlock.h"
-using namespace std;
 #define MIN_VALUE 0
 #define MAX_VALUE 0xffffffff
 

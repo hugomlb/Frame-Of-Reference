@@ -4,7 +4,6 @@
 #include "OutFile.h"
 #include <netinet/in.h>
 #include "BitVector.h"
-using namespace std;
 #define MAX_BIT_QUANTITY 32
 
 BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
@@ -18,7 +17,7 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
 }
 
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
-  bitset<MAX_BIT_QUANTITY>  bits (maxNumb);
+  std::bitset<MAX_BIT_QUANTITY>  bits(maxNumb);
   int inBit = 0;
   unsigned index = MAX_BIT_QUANTITY;
   while (inBit == 0 && index > 0) {

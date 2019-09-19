@@ -5,11 +5,9 @@
 #include <iostream>
 class OutFile {
   private:
-
     std::ostream* outFile;
 
   public:
-
     OutFile();
 
     void write(char* buf, int bytesToWrite);

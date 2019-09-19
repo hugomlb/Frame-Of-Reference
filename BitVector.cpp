@@ -1,5 +1,4 @@
 #include "BitVector.h"
-using namespace std;
 #define MAX_BIT_QUANTITY 32
 
 #include <bitset>
@@ -15,8 +14,8 @@ BitVector::BitVector(int amountOfBits) {
 }
 
 void BitVector::addBitsFrom(int amountOfBits, unsigned numbToAdd) {
-  bitset<MAX_BIT_QUANTITY> source(numbToAdd);
-  while ( 0 < amountOfBits) {
+  std::bitset<MAX_BIT_QUANTITY> source(numbToAdd);
+  while (0 < amountOfBits) {
     aux = (aux &~ (1UL << inBit)) | (source[amountOfBits - 1] << inBit);
     nextBit();
     amountOfBits --;
@@ -35,7 +34,6 @@ void BitVector::addPadding() {
       aux = (aux &~ (1UL << inBit)) | (0 << inBit);
       inBit --;
     }
-    bitset<8> bit (aux);
     *iterator = aux;
   }
 }
@@ -44,7 +42,6 @@ void BitVector::nextBit() {
   if (inBit == 0) {
     inBit = 7;
     if (iterator !=  bytes.end()){
-      bitset<8> bit (aux);
       *iterator = aux;
       iterator ++;
     }

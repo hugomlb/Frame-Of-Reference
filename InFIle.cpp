@@ -4,12 +4,11 @@
 #include <cstdint>
 #include <cstring>
 #include <netinet/in.h>
-using namespace std;
 #define END_OF_FILE -1
 #define OK 0
 
 InFile::InFile() {
-  file = &cin;
+  file = &std::cin;
   lastRead = 0;
   lectureNum = 0;
   /*if (file.is_open()) {

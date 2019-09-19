@@ -3,15 +3,14 @@
 #include <istream>
 #include "Block.h"
 class InFile {
-
   private:
     std::istream* file;
     unsigned lastRead;
     bool wasRead;
     int lectureNum;
     int isEOF();
-  public:
 
+  public:
     InFile();
 
     int readNumbsTo(Block* block, int amountOfNumb);

@@ -1,8 +1,7 @@
 #include "OutFile.h"
-using namespace std;
 
 OutFile::OutFile() {
-  outFile = &cout;
+  outFile = &std::cout;
   /*if (!outFile.is_open()) {
     cout << "chao" << endl;
   }*/

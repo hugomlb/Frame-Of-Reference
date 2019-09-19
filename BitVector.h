@@ -6,7 +6,6 @@
 
 class BitVector {
   private:
-
   std::vector<char>::iterator iterator;
   std::vector<char> bytes;
   char aux;
@@ -14,7 +13,6 @@ class BitVector {
   void nextBit();
 
   public:
-
   BitVector(int amountOfBits);
 
   void addBitsFrom(int amountOfBits, unsigned numbToAdd);

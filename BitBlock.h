@@ -4,7 +4,6 @@
 #include "OutFile.h"
 class BitBlock {
   private:
-
     unsigned int bitsPerNumb;
     unsigned int reference;
     BitVector* bitNumbs;
@@ -12,7 +11,6 @@ class BitBlock {
     unsigned int calculateBitsPerNumb(unsigned maxNumb);
 
   public:
-
     BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
 
     void addNumb(unsigned numbToAdd);
@@ -22,6 +20,5 @@ class BitBlock {
     ~BitBlock();
 
 };
-
 
 #endif
