@@ -1,12 +1,12 @@
 #ifndef _OUT_FILE_H_
 #define _OUT_FILE_H_
 
-#include <fstream>
+#include <ostream>
 #include <iostream>
 class OutFile {
   private:
 
-    std::ofstream outFile;
+    std::ostream* outFile;
 
   public:
 

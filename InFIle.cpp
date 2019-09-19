@@ -22,7 +22,6 @@ InFile::InFile() {
 int InFile::readNumbsTo(Block *block, int amountOfNumb) {
   int fileState = isEOF();
   wasRead = false;
-  cout << "Nuevo Bloque: " << endl;
   while (block -> hasSpace() && fileState == OK) {
     fileState = readNumberTo(block);
   }
