@@ -1,11 +1,11 @@
 #ifndef _IN_FILE_H_
 #define  _IN_FILE_H_
-#include <fstream>
+#include <istream>
 #include "Block.h"
 class InFile {
 
   private:
-    std::ifstream file;
+    std::istream* file;
     unsigned lastRead;
     bool wasRead;
     int lectureNum;

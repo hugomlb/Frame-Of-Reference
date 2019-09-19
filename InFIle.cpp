@@ -1,6 +1,6 @@
 #include "InFile.h"
 #include <iostream>
-#include <fstream>
+#include <istream>
 #include <cstdint>
 #include <cstring>
 #include <netinet/in.h>
@@ -9,14 +9,14 @@ using namespace std;
 #define OK 0
 
 InFile::InFile() {
-  this -> file = ifstream("alot", ios::in|ios::binary);
+  file = &cin;
   lastRead = 0;
   lectureNum = 0;
-  if (this -> file.is_open()) {
-    this -> file.seekg(0);
+  /*if (file.is_open()) {
+    file.seekg(0);
   } else {
     printf("%s\n", "No se pudo abrir el archivo");
-  }
+  }*/
 }
 
 int InFile::readNumbsTo(Block *block, int amountOfNumb) {
@@ -36,7 +36,7 @@ int InFile::readNumberTo(Block *block) {
   int fileState = isEOF();
   if (fileState == OK) {
     char* num = new char [4];
-    file.read(num, 4);
+    file -> read(num, 4);
     uint32_t number;
     memcpy(&number, num, sizeof(char) * 4);
     delete[] num;
@@ -53,12 +53,11 @@ int InFile::readNumberTo(Block *block) {
 
 int InFile::isEOF() {
   int returnValue = OK;
-  if (file.eof()) {
+  if (file -> eof()) {
     returnValue = END_OF_FILE;
   }
   return returnValue;
 }
 
 InFile::~InFile(){
-  file.close();
 }
