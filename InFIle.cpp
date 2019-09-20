@@ -10,10 +10,8 @@ InFile::InFile(const char* filename) {
   if (*filename == '-') {
     file = &std::cin;
   } else {
-    FILE* fd = freopen(filename, "r", stdin);
-    if (fd != NULL) {
-      file = &std::cin;
-    }
+    fd = std::ifstream(filename, std::ios::in|std::ios::binary);
+    file = &fd;
   }
   lastRead = 0;
   lectureNum = 0;
@@ -59,4 +57,5 @@ int InFile::isEOF() {
 }
 
 InFile::~InFile(){
+  fd.close();
 }

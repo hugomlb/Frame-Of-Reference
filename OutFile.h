@@ -3,9 +3,11 @@
 
 #include <ostream>
 #include <iostream>
+#include <fstream>
 class OutFile {
   private:
     std::ostream* outFile;
+    std::ofstream fd;
 
   public:
     OutFile(const char* filename);

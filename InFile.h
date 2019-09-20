@@ -6,6 +6,7 @@
 class InFile {
   private:
     std::istream* file;
+    std::ifstream fd;
     unsigned lastRead;
     bool wasRead;
     int lectureNum;

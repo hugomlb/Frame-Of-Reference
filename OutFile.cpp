@@ -4,11 +4,9 @@ OutFile::OutFile(const char* filename) {
   if (*filename == '-') {
     outFile = &std::cout;
   } else {
-    FILE* fd = freopen(filename, "w", stdout);
-    if (fd != NULL) {
-      outFile = &std::cout;
+    fd = std::ofstream(filename, std::ios::binary);
+    outFile = &fd;
     }
-  }
 }
 
 void OutFile::write(char *buf, int bytesToWrite) {
