@@ -10,12 +10,15 @@ class BitVector {
   std::vector<char> bytes;
   char aux;
   int inBit;
+  unsigned int bitsPerNumb;
+
   void nextBit();
+  unsigned int calculateBitsPerNumb(unsigned maxNumb);
 
   public:
-  explicit BitVector(int amountOfBits);
+  explicit BitVector(unsigned maxNumb, int amountOfNumbs);
 
-  void addBitsFrom(int amountOfBits, unsigned numbToAdd);
+  void addBitsFrom(unsigned numbToAdd);
 
   void writeTo(OutFile* outFile);
 
