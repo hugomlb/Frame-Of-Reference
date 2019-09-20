@@ -26,9 +26,7 @@ class Block {
 
     bool hasSpace();
 
-    void compress();
-
-    void writeTo(OutFile* outFile);
+    BitBlock compress();
 
     ~Block();
 };

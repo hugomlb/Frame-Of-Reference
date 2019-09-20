@@ -10,6 +10,8 @@ class BitBlock {
   public:
     explicit BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
 
+    //explicit BitBlock(BitBlock&& other);
+
     void addNumb(unsigned numbToAdd);
 
     void writeTo(OutFile *outFile);

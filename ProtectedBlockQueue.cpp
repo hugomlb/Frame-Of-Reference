@@ -8,7 +8,6 @@ ProtectedBlockQueue::ProtectedBlockQueue() {
 
 void ProtectedBlockQueue::push(Block block, bool processState) {
   std::unique_lock<std::mutex> lock(m);
-  block.testpush();
   queue.push(block);
   done(processState);
 }
@@ -19,8 +18,7 @@ void ProtectedBlockQueue::pop() {
     popCondition.wait(lock);
   }
   while (!queue.empty()) {
-    Block aBlock = queue.front();
-    aBlock.test();
+    //Block aBlock = queue.front();
     queue.pop();
   }
   popAvailable = false;

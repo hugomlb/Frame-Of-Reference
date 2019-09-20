@@ -42,16 +42,12 @@ bool Block::hasSpace() {
   return answer;
 }
 
-void Block::compress() {
-  bits =  new BitBlock(minNumb, (maxNumb - minNumb), numbs.size());
+BitBlock Block::compress() {
+  BitBlock bitBlock(minNumb, (maxNumb - minNumb), numbs.size());
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
-    bits -> addNumb(*iterator - minNumb);
+    bitBlock.addNumb(*iterator - minNumb);
   }
-}
-
-void Block::writeTo(OutFile *outFile) {
-  bits -> writeTo(outFile);
-  delete bits;
+  return bitBlock;
 }
 
 Block::~Block() {

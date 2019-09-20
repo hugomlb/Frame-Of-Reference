@@ -14,8 +14,8 @@ void FileCompressor::compress() {
   while (fileState == OK) {
     fileState = inFile -> readNumbsTo(&block, numbsPerBlock);
     if (!(block.hasSpace())) {
-      block.compress();
-      block.writeTo(outFile);
+      BitBlock bitBlock = block.compress();
+      bitBlock.writeTo(outFile);
       block.reset();
     }
   }
