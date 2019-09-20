@@ -4,11 +4,12 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
-#include "Block.h"
+#include "BitBlock.h"
+#include "OutFile.h"
 
 class ProtectedBlockQueue {
   private:
-    std::queue<Block> queue;
+    std::queue<BitBlock> queue;
     std::mutex m;
     std::condition_variable popCondition;
     int maxElements;
@@ -18,9 +19,9 @@ class ProtectedBlockQueue {
   public:
     ProtectedBlockQueue();
 
-    void push(Block block, bool processState);
+    void push(BitBlock bitBlock, bool processState);
 
-    void pop();
+    void popTo(OutFile* outFile);
 
     bool donePoping();
 

@@ -7,8 +7,14 @@
 int main(int argc, char const *argv[]) {
   InFile file(argv[4]);
   OutFile outFile(argv[5]);
-  FileCompressor fileCompressor(&file, &outFile, *argv[1] - '0');
+  ProtectedBlockQueue queue;
+  FileCompressor fileCompressor(&file, &queue, *argv[1] - '0');
   fileCompressor.compress();
+  while (!queue.donePoping()) {
+    queue.popTo(&outFile);
+  }
+
+
   /*ProtectedBlockQueue queue;
   bool flag = false;
   std::thread producer ([&](){

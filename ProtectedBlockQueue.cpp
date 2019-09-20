@@ -6,19 +6,20 @@ ProtectedBlockQueue::ProtectedBlockQueue() {
   popAvailable = false;
 }
 
-void ProtectedBlockQueue::push(Block block, bool processState) {
-  std::unique_lock<std::mutex> lock(m);
-  queue.push(block);
+void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
+  //std::unique_lock<std::mutex> lock(m);
+  queue.push(bitBlock);
   done(processState);
 }
 
-void ProtectedBlockQueue::pop() {
-  std::unique_lock<std::mutex> lock(m);
+void ProtectedBlockQueue::popTo(OutFile* outFile) {
+  /*std::unique_lock<std::mutex> lock(m);
   while (!popAvailable) {
     popCondition.wait(lock);
-  }
+  }*/
   while (!queue.empty()) {
-    //Block aBlock = queue.front();
+    BitBlock aBlock = queue.front();
+    aBlock.writeTo(outFile);
     queue.pop();
   }
   popAvailable = false;
@@ -35,7 +36,7 @@ bool ProtectedBlockQueue::donePoping() {
 void ProtectedBlockQueue::done(bool processState) {
   popAvailable = true;
   donePushing = processState;
-  popCondition.notify_all();
+  //popCondition.notify_all();
 }
 
 ProtectedBlockQueue::~ProtectedBlockQueue() {
