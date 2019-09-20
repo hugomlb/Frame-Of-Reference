@@ -1,10 +1,14 @@
 #include "OutFile.h"
-
-OutFile::OutFile() {
-  outFile = &std::cout;
-  /*if (!outFile.is_open()) {
-    cout << "chao" << endl;
-  }*/
+#include <fstream>
+OutFile::OutFile(const char* filename) {
+  if (*filename == '-') {
+    outFile = &std::cout;
+  } else {
+    FILE* fd = freopen(filename, "w", stdout);
+    if (fd != NULL) {
+      outFile = &std::cout;
+    }
+  }
 }
 
 void OutFile::write(char *buf, int bytesToWrite) {

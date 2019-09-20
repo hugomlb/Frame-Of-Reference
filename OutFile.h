@@ -8,7 +8,7 @@ class OutFile {
     std::ostream* outFile;
 
   public:
-    OutFile();
+    OutFile(const char* filename);
 
     void write(char* buf, int bytesToWrite);
 

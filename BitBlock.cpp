@@ -13,7 +13,7 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
     bitsPerNumb = calculateBitsPerNumb(maxNumb);
   }
   reference = aReference;
-  bitNumbs = new BitVector(amountOfNumbs * bitsPerNumb);
+  bitNumbs =  new BitVector(amountOfNumbs * bitsPerNumb);
 }
 
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
@@ -41,5 +41,5 @@ void BitBlock::writeTo(OutFile* outFile) {
 }
 
 BitBlock::~BitBlock() {
-  delete bitNumbs;
+  delete  bitNumbs;
 }

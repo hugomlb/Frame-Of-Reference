@@ -3,6 +3,13 @@
 #define MIN_VALUE 0
 #define MAX_VALUE 0xffffffff
 
+void Block::test() {
+  std::cout << "Poppeando" << std::endl;
+}
+
+void Block::testpush() {
+  std::cout << "Pusheando" << std::endl;
+}
 
 Block::Block(int amountOfNumbs) {
   numbs.resize(amountOfNumbs);

@@ -30,6 +30,10 @@ class Block {
 
     void writeTo(OutFile* outFile);
 
+    void test();
+
+    void testpush();
+
     ~Block();
 };
 #endif

@@ -7,7 +7,7 @@ class FileCompressor {
   private:
     InFile* inFile;
     OutFile* outFile;
-    Block* block;
+    Block block;
     int numbsPerBlock;
 
   public:
