@@ -11,7 +11,7 @@ class FileCompressor {
     int numbsPerBlock;
 
   public:
-    FileCompressor(InFile* in, OutFile* out, int numbsPerBlock);
+    explicit FileCompressor(InFile* in, OutFile* out, int numbsPerBlock);
 
     void compress();
 

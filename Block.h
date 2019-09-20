@@ -18,7 +18,7 @@ class Block {
 
 
   public:
-    Block(int amountOfNumbs);
+    explicit Block(int amountOfNumbs);
 
     void addNumber(unsigned numbToAdd);
 

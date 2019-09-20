@@ -10,7 +10,7 @@ class OutFile {
     std::ofstream fd;
 
   public:
-    OutFile(const char* filename);
+    explicit OutFile(const char* filename);
 
     void write(char* buf, int bytesToWrite);
 

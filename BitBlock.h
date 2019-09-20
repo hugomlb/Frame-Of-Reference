@@ -11,14 +11,13 @@ class BitBlock {
     unsigned int calculateBitsPerNumb(unsigned maxNumb);
 
   public:
-    BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
+    explicit BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
 
     void addNumb(unsigned numbToAdd);
 
     void writeTo(OutFile *outFile);
 
     ~BitBlock();
-
 };
 
 #endif

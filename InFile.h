@@ -15,7 +15,7 @@ class InFile {
     int isEOF();
 
   public:
-    InFile(const char* filename);
+    explicit InFile(const char* filename);
 
     int readNumbsTo(Block* block, int amountOfNumb);
 

@@ -13,7 +13,7 @@ class BitVector {
   void nextBit();
 
   public:
-  BitVector(int amountOfBits);
+  explicit BitVector(int amountOfBits);
 
   void addBitsFrom(int amountOfBits, unsigned numbToAdd);
 

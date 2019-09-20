@@ -27,7 +27,6 @@ class ProtectedBlockQueue {
     void done(bool processState);
 
     ~ProtectedBlockQueue();
-
 };
 
 
