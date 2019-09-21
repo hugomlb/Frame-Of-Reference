@@ -18,8 +18,7 @@ void ProtectedBlockQueue::popTo(OutFile* outFile) {
     popCondition.wait(lock);
   }*/
   while (!queue.empty()) {
-    BitBlock aBlock = queue.front();
-    aBlock.writeTo(outFile);
+    queue.front().writeTo(outFile);
     queue.pop();
   }
   popAvailable = false;

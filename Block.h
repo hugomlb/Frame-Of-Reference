@@ -2,6 +2,7 @@
 #define  _BLOCK_H_
 #include <vector>
 #include "BitBlock.h"
+#include "ProtectedBlockQueue.h"
 #include "OutFile.h"
 
 class Block {
@@ -26,7 +27,7 @@ class Block {
 
     bool hasSpace();
 
-    BitBlock compress();
+    BitBlock compressTo(ProtectedBlockQueue* queue);
 
     ~Block();
 };

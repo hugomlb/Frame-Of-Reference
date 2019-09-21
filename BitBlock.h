@@ -17,6 +17,10 @@ class BitBlock {
   public:
     explicit BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
 
+    BitBlock(const BitBlock& other) = default;
+
+    BitBlock(BitBlock&& other);
+
     void addBitsFrom(unsigned numbToAdd);
 
     void addNumb(unsigned numbToAdd);

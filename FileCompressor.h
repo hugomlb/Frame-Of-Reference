@@ -3,6 +3,8 @@
 #include "InFile.h"
 #include "ProtectedBlockQueue.h"
 #include "Block.h"
+
+#include "OutFile.h"
 class FileCompressor {
   private:
     InFile* inFile;
@@ -11,8 +13,7 @@ class FileCompressor {
     int numbsPerBlock;
 
   public:
-    explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue,
-        int numbsPerBlock);
+    explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue, int numbsPerBlock);
 
     void compress();
 

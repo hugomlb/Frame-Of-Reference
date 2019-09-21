@@ -1,5 +1,6 @@
 #include "Block.h"
 #include "BitBlock.h"
+#include "ProtectedBlockQueue.h"
 #define MIN_VALUE 0
 #define MAX_VALUE 0xffffffff
 
@@ -42,11 +43,13 @@ bool Block::hasSpace() {
   return answer;
 }
 
-BitBlock Block::compress() {
+BitBlock Block::compressTo(ProtectedBlockQueue *queue) {
   BitBlock bitBlock(minNumb, (maxNumb - minNumb), numbs.size());
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     bitBlock.addNumb(*iterator - minNumb);
   }
+  bitBlock.addPadding();
+  queue->push(std::move(bitBlock), false);
   return bitBlock;
 }
 

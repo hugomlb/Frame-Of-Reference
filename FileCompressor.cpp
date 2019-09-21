@@ -14,8 +14,8 @@ void FileCompressor::compress() {
   while (fileState == OK) {
     fileState = inFile -> readNumbsTo(&block, numbsPerBlock);
     if (!(block.hasSpace())) {
-      BitBlock bitBlock = block.compress();
-      queue -> push(bitBlock, false);
+      BitBlock bitBlock = block.compressTo(queue);
+      //queue -> push(std::move(bitBlock), false);
       block.reset();
     }
   }
