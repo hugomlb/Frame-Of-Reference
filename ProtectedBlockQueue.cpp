@@ -8,7 +8,11 @@ ProtectedBlockQueue::ProtectedBlockQueue() {
 
 void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
   std::unique_lock<std::mutex> lock(m);
+  while (queue.size() >= maxElements) {
+    pushCondition.wait(lock);
+  }
   queue.push(bitBlock);
+  std::cout << "Push, Hay" << queue.size() << std::endl;
   done(processState);
 }
 
@@ -20,8 +24,10 @@ void ProtectedBlockQueue::popTo(OutFile* outFile) {
   while (!queue.empty()) {
     queue.front().writeTo(outFile);
     queue.pop();
+    std::cout << "Pop, Quedan: " << queue.size() << std::endl;
   }
   popAvailable = false;
+  pushCondition.notify_all();
 }
 
 bool ProtectedBlockQueue::donePoping() {

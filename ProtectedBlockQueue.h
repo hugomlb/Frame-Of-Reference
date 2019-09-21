@@ -12,7 +12,8 @@ class ProtectedBlockQueue {
     std::queue<BitBlock> queue;
     std::mutex m;
     std::condition_variable popCondition;
-    int maxElements;
+    std::condition_variable pushCondition;
+    unsigned maxElements;
     bool donePushing;
     bool popAvailable;
 
