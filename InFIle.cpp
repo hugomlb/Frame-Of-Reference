@@ -14,17 +14,25 @@ InFile::InFile(const char* filename) {
     file = &fd;
   }
   lastRead = 0;
-  lectureNum = 0;
+  file -> seekg(0, file -> end);
+  size = file -> tellg();
+  file -> seekg(0, file -> beg);
 }
 
-int InFile::readNumbsTo(Block *block, int amountOfNumb) {
-  int fileState = isEOF();
+int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) {
+  file -> seekg(position, file -> beg);
+  int fileState = OK;
+  if (file -> tellg() >= size) {
+    std::cout << "Te fuiste de mambo" << std::endl;
+    fileState = END_OF_FILE;
+  }
+  //int fileState = isEOF();
   wasRead = false;
   while (block -> hasSpace() && fileState == OK) {
     fileState = readNumberTo(block);
   }
   while (block -> hasSpace() && wasRead) {
-    block ->addNumber(lastRead);
+    block -> addNumber(lastRead);
   }
   return  fileState;
 }

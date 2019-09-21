@@ -6,6 +6,8 @@
 
 int main(int argc, char const *argv[]) {
   InFile file(argv[4]);
+
+
   OutFile outFile(argv[5]);
   ProtectedBlockQueue queue(*argv[3] - '0');
   std::thread lector([&](){

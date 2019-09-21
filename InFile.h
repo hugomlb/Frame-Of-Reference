@@ -9,17 +9,18 @@ class InFile {
     std::ifstream fd;
     unsigned lastRead;
     bool wasRead;
-    int lectureNum;
+    int size;
 
+    int readNumberTo(Block* block);
 
     int isEOF();
 
   public:
     explicit InFile(const char* filename);
 
-    int readNumbsTo(Block* block, int amountOfNumb);
+    int readNumbsToStartingAt(int amountOfNumb, Block* block, int position);
 
-    int readNumberTo(Block* block);
+    void readStartingIn(int position);
 
     ~InFile();
 };
