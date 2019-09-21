@@ -13,7 +13,8 @@ class FileCompressor {
     int numbsPerBlock;
 
   public:
-    explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue, int numbsPerBlock);
+    explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue,
+        int numbsPerBlock);
 
     void compress();
 

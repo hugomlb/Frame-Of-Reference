@@ -23,7 +23,7 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   reference = aReference;
 }
 
-BitBlock::BitBlock(BitBlock &&other)/*:iterator(std::move(other.iterator)), bytes(std::move(other.bytes))*/{
+BitBlock::BitBlock(BitBlock &&other) {
   this -> bytes = std::move(other.bytes);
   this -> iterator = std::move(other.iterator);
   this -> reference = other.reference;
@@ -61,7 +61,6 @@ void BitBlock::addNumb(unsigned numbToAdd) {
 void BitBlock::writeTo(OutFile* outFile) {
   reference = ntohl(reference);
   outFile -> write((char*) &reference, 4);
-  //addPadding();
   outFile -> write((char*) &bitsPerNumb, 1);
   for (iterator = bytes.begin(); iterator < bytes.end(); iterator ++) {
     outFile -> write(&(*iterator), 1);
