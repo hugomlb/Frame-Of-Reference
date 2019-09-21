@@ -15,8 +15,6 @@ class FileCompressor : public Thread {
     explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue,
         int numbsPerBlock);
 
-    void compress();
-
     void run();
 
     ~FileCompressor();

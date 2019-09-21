@@ -1,8 +1,8 @@
 #include "InFile.h"
 #include "FileCompressor.h"
-
-#include <thread>
+#include "OutFile.h"
 #include "ProtectedBlockQueue.h"
+#include "Writer.h"
 
 int main(int argc, char const *argv[]) {
   InFile file(argv[4]);
@@ -10,8 +10,7 @@ int main(int argc, char const *argv[]) {
   ProtectedBlockQueue queue(*argv[3] - '0');
   FileCompressor fileCompressor(&file, &queue, *argv[1] - '0');
   fileCompressor.start();
-  while (!queue.donePoping()) {
-    queue.popTo(&outFile);
-  }
+  Writer writer(&queue, &outFile);
+  writer.write();
   fileCompressor.join();
 }
