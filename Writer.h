@@ -11,11 +11,12 @@ class Writer {
     OutFile* outFile;
     unsigned currentQueue;
   public:
-    Writer(std::vector<ProtectedBlockQueue>* queueVector, OutFile* outFile);
+    explicit Writer(std::vector<ProtectedBlockQueue>* queueVector,
+        OutFile* outFile);
 
     void write();
 
-    bool nextQueue();
+    void nextQueue();
 };
 
 

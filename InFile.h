@@ -2,11 +2,13 @@
 #define  _IN_FILE_H_
 #include <istream>
 #include "Block.h"
+#include <mutex>
 #include <fstream>
 class InFile {
   private:
     std::istream* file;
     std::ifstream fd;
+    std::mutex mutex;
     unsigned lastRead;
     bool wasRead;
     int size;

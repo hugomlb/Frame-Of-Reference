@@ -9,9 +9,13 @@ int main(int argc, char const *argv[]) {
   OutFile outFile(argv[5]);
   std::vector<ProtectedBlockQueue> queueVector;
   queueVector.push_back(ProtectedBlockQueue(*argv[3] - '0'));
-  FileCompressor fileCompressor(&file, &queueVector[0], *argv[1] - '0', 1, 0);
-  fileCompressor.start();
+  queueVector.push_back(ProtectedBlockQueue(*argv[3] - '0'));
+  FileCompressor fileCompressor1(&file, &queueVector[0], *argv[1] - '0', 2, 0);
+  FileCompressor fileCompressor2(&file, &queueVector[1], *argv[1] - '0', 2, 1);
+  fileCompressor1.start();
+  fileCompressor2.start();
   Writer writer(&queueVector, &outFile);
   writer.write();
-  fileCompressor.join();
+  fileCompressor1.join();
+  fileCompressor2.join();
 }
