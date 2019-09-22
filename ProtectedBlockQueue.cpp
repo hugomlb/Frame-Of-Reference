@@ -15,10 +15,10 @@ ProtectedBlockQueue::ProtectedBlockQueue(ProtectedBlockQueue &&other) {
 
 ProtectedBlockQueue& ProtectedBlockQueue::operator=(
     const ProtectedBlockQueue & other) {
-  if (this == & other) {
+  if (this == &other) {
     return *this;
   }
-  this -> queue = other.queue;
+  this -> queue = other.queue; //ESTO NO ANDA
   this -> maxElements = other.maxElements;
   this -> donePushing = other.donePushing;
   this -> popAvailable = other.popAvailable;

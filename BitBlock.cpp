@@ -32,6 +32,21 @@ BitBlock::BitBlock(BitBlock &&other) {
   this -> inBit = other.inBit;
 }
 
+BitBlock& BitBlock::operator=(const BitBlock &other) {
+  if (this == &other) {
+    return *this;
+  }
+  for (unsigned i = 0; i < other.bytes.size(); i++) {
+    this -> bytes.push_back(other.bytes[i]);
+  }
+  this -> iterator = this -> bytes.begin();
+  this -> reference = other.reference;
+  this -> aux = other.aux;
+  this -> bitsPerNumb = other.bitsPerNumb;
+  this -> inBit = other.inBit;
+  return *this;
+}
+
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
   std::bitset<MAX_BIT_QUANTITY>  bits(maxNumb);
   int inBit = 0;
