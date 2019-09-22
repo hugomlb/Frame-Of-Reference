@@ -49,7 +49,7 @@ BitBlock Block::compressTo(ProtectedBlockQueue *queue) {
     bitBlock.addNumb(*iterator - minNumb);
   }
   bitBlock.addPadding();
-  queue->push(std::move(bitBlock), false);
+  queue -> push(std::move(bitBlock), false);
   return bitBlock;
 }
 

@@ -1,12 +1,14 @@
 #include "Writer.h"
 
-Writer::Writer(ProtectedBlockQueue* queue, OutFile *outFile) {
-  this -> queue = queue;
+Writer::Writer(std::vector<ProtectedBlockQueue>* queueVector,
+    OutFile *outFile) {
+  this -> queues = queueVector;
   this -> outFile = outFile;
+  //currentQueue = queues -> begin();
 }
 
 void Writer::write() {
-  while (!queue -> donePoping()) {
-    queue -> popTo(outFile);
+  while (!queues -> at(0).donePoping()) {
+    queues -> at(0).popTo(outFile);
   }
 }

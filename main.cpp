@@ -7,10 +7,11 @@
 int main(int argc, char const *argv[]) {
   InFile file(argv[4]);
   OutFile outFile(argv[5]);
-  ProtectedBlockQueue queue(*argv[3] - '0');
-  FileCompressor fileCompressor(&file, &queue, *argv[1] - '0');
+  std::vector<ProtectedBlockQueue> queueVector;
+  queueVector.push_back(ProtectedBlockQueue(*argv[3] - '0'));
+  FileCompressor fileCompressor(&file, &queueVector[0], *argv[1] - '0');
   fileCompressor.start();
-  Writer writer(&queue, &outFile);
+  Writer writer(&queueVector, &outFile);
   writer.write();
   fileCompressor.join();
 }

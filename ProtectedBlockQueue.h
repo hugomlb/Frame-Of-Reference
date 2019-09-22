@@ -20,6 +20,10 @@ class ProtectedBlockQueue {
   public:
     explicit ProtectedBlockQueue(int maxAmountOfElements);
 
+    ProtectedBlockQueue(ProtectedBlockQueue&& other);
+
+    ProtectedBlockQueue(const ProtectedBlockQueue& other) = default;
+
     void push(BitBlock bitBlock, bool processState);
 
     void popTo(OutFile* outFile);
