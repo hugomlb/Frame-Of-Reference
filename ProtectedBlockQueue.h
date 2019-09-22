@@ -24,6 +24,8 @@ class ProtectedBlockQueue {
 
     ProtectedBlockQueue(const ProtectedBlockQueue& other) = default;
 
+    ProtectedBlockQueue& operator=(const ProtectedBlockQueue& other);
+
     void push(BitBlock bitBlock, bool processState);
 
     void popTo(OutFile* outFile);

@@ -8,8 +8,10 @@
 class Writer {
   private:
     std::vector<ProtectedBlockQueue>* queues;
-    std::vector<ProtectedBlockQueue>:: iterator currentQueue;
+    unsigned currentQueue;
     OutFile* outFile;
+
+    void toNextQueue();
   public:
     Writer(std::vector<ProtectedBlockQueue>* queueVector, OutFile* outFile);
 

@@ -19,14 +19,12 @@ InFile::InFile(const char* filename) {
   file -> seekg(0, file -> beg);
 }
 
-int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) {
+int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) { //PONER MUTEX EN ESTA FUNCION
   file -> seekg(position, file -> beg);
   int fileState = OK;
   if (file -> tellg() >= size) {
-    std::cout << "Te fuiste de mambo" << std::endl;
     fileState = END_OF_FILE;
   }
-  //int fileState = isEOF();
   wasRead = false;
   while (block -> hasSpace() && fileState == OK) {
     fileState = readNumberTo(block);

@@ -13,6 +13,18 @@ ProtectedBlockQueue::ProtectedBlockQueue(ProtectedBlockQueue &&other) {
   this -> popAvailable = other.popAvailable;
 }
 
+ProtectedBlockQueue& ProtectedBlockQueue::operator=(
+    const ProtectedBlockQueue & other) {
+  if (this == & other) {
+    return *this;
+  }
+  this -> queue = other.queue;
+  this -> maxElements = other.maxElements;
+  this -> donePushing = other.donePushing;
+  this -> popAvailable = other.popAvailable;
+  return  *this;
+}
+
 void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
   std::unique_lock<std::mutex> lock(m);
   while (queue.size() >= maxElements) {
@@ -27,10 +39,8 @@ void ProtectedBlockQueue::popTo(OutFile* outFile) {
   while (!popAvailable) {
     popCondition.wait(lock);
   }
-  while (!queue.empty()) {
-    queue.front().writeTo(outFile);
-    queue.pop();
-  }
+  queue.front().writeTo(outFile);
+  queue.pop();
   popAvailable = false;
   pushCondition.notify_all();
 }

@@ -4,11 +4,23 @@ Writer::Writer(std::vector<ProtectedBlockQueue>* queueVector,
     OutFile *outFile) {
   this -> queues = queueVector;
   this -> outFile = outFile;
-  currentQueue = queues -> begin();
+  currentQueue = 0;
 }
 
 void Writer::write() {
-  while (!currentQueue -> donePoping()) {
-    currentQueue -> popTo(outFile);
+  while (!queues -> empty()) {
+    queues -> at(currentQueue).popTo(outFile);
+    toNextQueue();
   }
 }
+
+void Writer::toNextQueue() {
+  if (queues -> at(currentQueue).donePoping()) {
+    queues -> erase(queues -> begin() + currentQueue);
+  } else if (currentQueue + 1 == queues -> size()) {
+    currentQueue = 0;
+  }else {
+    currentQueue ++;
+  }
+}
+
