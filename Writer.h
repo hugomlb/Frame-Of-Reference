@@ -7,20 +7,15 @@
 
 class Writer {
   private:
-    std::vector<ProtectedBlockQueue> queues;
-    unsigned currentQueue;
+    std::vector<ProtectedBlockQueue>* vectorOfQueue;
     OutFile* outFile;
-
-    void toNextQueue();
+    unsigned currentQueue;
   public:
-    Writer(OutFile* outFile);
-
-    ProtectedBlockQueue* getQueue();
+    Writer(std::vector<ProtectedBlockQueue>* queueVector, OutFile* outFile);
 
     void write();
 
-    ~Writer();
-
+    bool nextQueue();
 };
 
 

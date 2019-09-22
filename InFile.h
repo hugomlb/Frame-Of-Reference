@@ -20,6 +20,8 @@ class InFile {
 
     int readNumbsToStartingAt(int amountOfNumb, Block* block, int position);
 
+    void readStartingIn(int position);
+
     ~InFile();
 };
 

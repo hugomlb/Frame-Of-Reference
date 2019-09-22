@@ -11,18 +11,7 @@ ProtectedBlockQueue::ProtectedBlockQueue(ProtectedBlockQueue &&other) {
   this -> maxElements = other.maxElements;
   this -> donePushing = other.donePushing;
   this -> popAvailable = other.popAvailable;
-}
 
-ProtectedBlockQueue& ProtectedBlockQueue::operator=(
-    const ProtectedBlockQueue & other) {
-  if (this == &other) {
-    return *this;
-  }
-  this -> queue = other.queue; //ESTO NO ANDA
-  this -> maxElements = other.maxElements;
-  this -> donePushing = other.donePushing;
-  this -> popAvailable = other.popAvailable;
-  return  *this;
 }
 
 void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
@@ -39,8 +28,10 @@ void ProtectedBlockQueue::popTo(OutFile* outFile) {
   while (!popAvailable) {
     popCondition.wait(lock);
   }
-  queue.front().writeTo(outFile);
-  queue.pop();
+  while (!queue.empty()) {
+    queue.front().writeTo(outFile);
+    queue.pop();
+  }
   popAvailable = false;
   pushCondition.notify_all();
 }

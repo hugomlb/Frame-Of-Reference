@@ -19,10 +19,11 @@ InFile::InFile(const char* filename) {
   file -> seekg(0, file -> beg);
 }
 
-int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) { //PONER MUTEX EN ESTA FUNCION
+int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) { //PONER MUTEX
   file -> seekg(position, file -> beg);
   int fileState = OK;
   if (file -> tellg() >= size) {
+    std::cout << "Te fuiste de mambo" << std::endl;
     fileState = END_OF_FILE;
   }
   wasRead = false;
