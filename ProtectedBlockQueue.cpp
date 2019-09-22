@@ -8,13 +8,9 @@ ProtectedBlockQueue::ProtectedBlockQueue(int maxAmountOfElements) {
 
 ProtectedBlockQueue::ProtectedBlockQueue(ProtectedBlockQueue &&other) {
   this -> queue = std::move(other.queue);
-  //this -> m = std::move(other.m);
-  //this -> popCondition = std::move(other.popCondition);
-  //this -> pushCondition = std::move(other.pushCondition);
   this -> maxElements = other.maxElements;
   this -> donePushing = other.donePushing;
   this -> popAvailable = other.popAvailable;
-
 }
 
 void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {

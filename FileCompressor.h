@@ -10,10 +10,12 @@ class FileCompressor : public Thread {
     ProtectedBlockQueue* queue;
     Block block;
     int numbsPerBlock;
+    int numbOfThreads;
+    int myNumb;
 
   public:
     explicit FileCompressor(InFile* in, ProtectedBlockQueue* queue,
-        int numbsPerBlock);
+        int numbsPerBlock, int numbOfThreads, int myNumb);
 
     void run();
 
