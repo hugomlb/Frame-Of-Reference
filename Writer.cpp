@@ -11,7 +11,6 @@ void Writer::write() {
   while (!vectorOfQueue -> at(currentQueue).donePoping()) {
     vectorOfQueue -> at(currentQueue).popTo(outFile);
     nextQueue();
-    std::cout<< "Leyendo de:" << currentQueue << std::endl;
   }
 }
 
