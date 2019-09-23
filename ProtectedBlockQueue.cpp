@@ -28,10 +28,8 @@ void ProtectedBlockQueue::popTo(OutFile* outFile) {
   while (!popAvailable) {
     popCondition.wait(lock);
   }
-  while (!queue.empty()) {
-    queue.front().writeTo(outFile);
-    queue.pop();
-  }
+  queue.front().writeTo(outFile);
+  queue.pop();
   popAvailable = false;
   pushCondition.notify_all();
 }

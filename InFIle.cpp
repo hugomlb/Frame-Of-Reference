@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <cstring>
 #include <netinet/in.h>
+#include "Lock.h"
 #define END_OF_FILE -1
 #define OK 0
 
@@ -20,7 +21,7 @@ InFile::InFile(const char* filename) {
 }
 
 int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) {
-  mutex.lock();
+  Lock aLock(mutex);
   file -> seekg(position, file -> beg);
   int fileState = OK;
   if (file -> tellg() >= size) {
@@ -33,9 +34,7 @@ int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) 
   while (block -> hasSpace() && wasRead) {
     block -> addNumber(lastRead);
   }
-  int returnValue = fileState;
-  mutex.unlock();
-  return  returnValue;
+  return  fileState;
 }
 
 int InFile::readNumberTo(Block *block) {

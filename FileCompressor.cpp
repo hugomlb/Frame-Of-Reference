@@ -24,7 +24,6 @@ void FileCompressor::run() {
     }
   }
   queue -> done(true);
-  std::cout<< "Termino: " << myNumb << std::endl;
 }
 
 FileCompressor::~FileCompressor() {
