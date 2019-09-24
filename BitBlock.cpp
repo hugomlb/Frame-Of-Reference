@@ -24,6 +24,10 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   iterator = bytes.begin();
   inBit = FIRST_BIT;
   reference = aReference;
+  validBlock = true;
+  if (amountOfNumbs == 0) {
+    validBlock = false;
+  }
 }
 
 BitBlock::BitBlock(BitBlock &&other): iterator(std::move(other.iterator)),
@@ -32,6 +36,7 @@ BitBlock::BitBlock(BitBlock &&other): iterator(std::move(other.iterator)),
   this -> aux = other.aux;
   this -> bitsPerNumb = other.bitsPerNumb;
   this -> inBit = other.inBit;
+  this -> validBlock = other.validBlock;
 }
 
 BitBlock& BitBlock::operator=(BitBlock &&other) {
@@ -44,6 +49,7 @@ BitBlock& BitBlock::operator=(BitBlock &&other) {
   this -> aux = other.aux;
   this -> bitsPerNumb = other.bitsPerNumb;
   this -> inBit = other.inBit;
+  this -> validBlock = other.validBlock;
   return *this;
 }
 
@@ -74,11 +80,13 @@ void BitBlock::addNumb(unsigned numbToAdd) {
 }
 
 void BitBlock::writeTo(OutFile* outFile) {
-  reference = ntohl(reference);
-  outFile -> write((char*) &reference, REFERENCE_SIZE);
-  outFile -> write((char*) &bitsPerNumb, 1);
-  for (iterator = bytes.begin(); iterator < bytes.end(); iterator ++) {
-    outFile -> write(&(*iterator), 1);
+  if (validBlock) {
+    reference = ntohl(reference);
+    outFile -> write((char*) &reference, REFERENCE_SIZE);
+    outFile -> write((char*) &bitsPerNumb, 1);
+    for (iterator = bytes.begin(); iterator < bytes.end(); iterator ++) {
+      outFile -> write(&(*iterator), 1);
+    }
   }
 }
 

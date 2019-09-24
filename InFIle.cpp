@@ -24,7 +24,7 @@ InFile::InFile(const char* filename) {
 
 int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
     int position) {
-  Lock aLock(mutex);
+  mutex.lock();
   file -> seekg(position, file -> beg);
   int fileState = OK;
   if (file -> tellg() >= size) {
@@ -37,6 +37,7 @@ int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
   while (block -> hasSpace() && wasRead) {
     block -> addNumber(lastRead);
   }
+  mutex.unlock();
   return  fileState;
 }
 

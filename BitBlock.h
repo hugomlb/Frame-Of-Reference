@@ -9,6 +9,7 @@ class BitBlock {
     std::vector<char> bytes;
     char aux;
     int inBit;
+    bool validBlock;
     unsigned int bitsPerNumb;
 
     void nextBit();

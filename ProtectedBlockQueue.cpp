@@ -1,4 +1,5 @@
 #include "ProtectedBlockQueue.h"
+#include "Lock.h"
 
 ProtectedBlockQueue::ProtectedBlockQueue(int maxAmountOfElements) {
   maxElements = maxAmountOfElements;
