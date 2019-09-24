@@ -1,20 +1,20 @@
 #include "ProtectedBitBlockQueue.h"
 #include "Lock.h"
 
-ProtectedBlockQueue::ProtectedBlockQueue(int maxAmountOfElements) {
+ProtectedBitBlockQueue::ProtectedBitBlockQueue(int maxAmountOfElements) {
   maxElements = maxAmountOfElements;
   donePushing = false;
   popAvailable = false;
 }
 
-ProtectedBlockQueue::ProtectedBlockQueue(const ProtectedBlockQueue &other):
-    queue(other.queue) {
+ProtectedBitBlockQueue::ProtectedBitBlockQueue
+  (const ProtectedBitBlockQueue &other):queue(other.queue) {
   this -> maxElements = other.maxElements;
   this -> donePushing = other.donePushing;
   this -> popAvailable = other.popAvailable;
 }
 
-void ProtectedBlockQueue::push(BitBlock bitBlock) {
+void ProtectedBitBlockQueue::push(BitBlock bitBlock) {
   std::unique_lock<std::mutex> lock(m);
   while (queue.size() >= maxElements) {
     pushCondition.wait(lock);
@@ -23,7 +23,7 @@ void ProtectedBlockQueue::push(BitBlock bitBlock) {
   done(false);
 }
 
-BitBlock ProtectedBlockQueue::pop() {
+BitBlock ProtectedBitBlockQueue::pop() {
   std::unique_lock<std::mutex> lock(m);
   BitBlock bitBlock(0, 0, 0);
   while (!popAvailable && !donePushing) {
@@ -38,7 +38,7 @@ BitBlock ProtectedBlockQueue::pop() {
   return std::move(bitBlock);
 }
 
-bool ProtectedBlockQueue::donePoping() {
+bool ProtectedBitBlockQueue::donePoping() {
   bool answer = false;
   if (donePushing && queue.size() == 0) {
     answer = true;
@@ -46,11 +46,11 @@ bool ProtectedBlockQueue::donePoping() {
   return  answer;
 }
 
-void ProtectedBlockQueue::done(bool processState) {
+void ProtectedBitBlockQueue::done(bool processState) {
   popAvailable = true;
   donePushing = processState;
   popCondition.notify_all();
 }
 
-ProtectedBlockQueue::~ProtectedBlockQueue() {
+ProtectedBitBlockQueue::~ProtectedBitBlockQueue() {
 }

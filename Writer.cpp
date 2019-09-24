@@ -3,7 +3,7 @@
 
 Writer::Writer(OutFile *outFile, int maxElements, int amountOfQueues) {
   for (int i = 0; i < amountOfQueues; i++){
-    vectorOfQueue.push_back(ProtectedBlockQueue(maxElements));
+    vectorOfQueues.push_back(ProtectedBitBlockQueue(maxElements));
   }
   this -> outFile = outFile;
   this -> amountOfQueues = amountOfQueues;
@@ -11,20 +11,20 @@ Writer::Writer(OutFile *outFile, int maxElements, int amountOfQueues) {
 }
 
 void Writer::write() {
-  while (!vectorOfQueue.at(currentQueue).donePoping()) {
-    BitBlock bitBlock = std::move(vectorOfQueue.at(currentQueue).pop());
+  while (!vectorOfQueues.at(currentQueue).donePoping()) {
+    BitBlock bitBlock = std::move(vectorOfQueues.at(currentQueue).pop());
     bitBlock.writeTo(outFile);
     nextQueue();
   }
 }
 
-ProtectedBlockQueue* Writer::getQueueFor(int thread) {
-  return &vectorOfQueue.at(thread);
+ProtectedBitBlockQueue* Writer::getQueueFor(int thread) {
+  return &vectorOfQueues.at(thread);
 }
 
 void Writer::nextQueue() {
   unsigned newQueue = currentQueue + 1;
-  if (newQueue < vectorOfQueue.size()) {
+  if (newQueue < vectorOfQueues.size()) {
     currentQueue = newQueue;
   } else {
     currentQueue = FIRST_QUEUE;

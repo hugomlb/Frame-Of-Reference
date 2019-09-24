@@ -7,7 +7,7 @@
 
 class Writer {
 private:
-  std::vector<ProtectedBlockQueue> vectorOfQueue;
+  std::vector<ProtectedBitBlockQueue> vectorOfQueues;
   OutFile* outFile;
   unsigned currentQueue;
   int amountOfQueues;
@@ -16,7 +16,7 @@ public:
 
   void write();
 
-  ProtectedBlockQueue* getQueueFor(int thread);
+  ProtectedBitBlockQueue* getQueueFor(int thread);
 
   void nextQueue();
 

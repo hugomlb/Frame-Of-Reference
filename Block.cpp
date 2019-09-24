@@ -43,7 +43,7 @@ bool Block::hasSpace() {
   return answer;
 }
 
-void Block::compressTo(ProtectedBlockQueue *queue) {
+void Block::compressTo(ProtectedBitBlockQueue *queue) {
   BitBlock bitBlock(minNumb, (maxNumb - minNumb), numbs.size());
   for (iterator = numbs.begin(); iterator < numbs.end(); iterator ++) {
     bitBlock.addNumb(*iterator - minNumb);

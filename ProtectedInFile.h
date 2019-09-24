@@ -4,7 +4,7 @@
 #include "Block.h"
 #include <mutex>
 #include <fstream>
-class InFile {
+class ProtectedInFile {
   private:
     std::istream* file;
     std::ifstream fd;
@@ -18,11 +18,11 @@ class InFile {
     int isEOF();
 
   public:
-    explicit InFile(const char* filename);
+    explicit ProtectedInFile(const char* filename);
 
     int readNumbsToStartingAt(int amountOfNumb, Block* block, int position);
 
-    ~InFile();
+    ~ProtectedInFile();
 };
 
 #endif

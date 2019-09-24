@@ -1,10 +1,10 @@
-#include "InFile.h"
+#include "ProtectedInFile.h"
 #include "FileCompressor.h"
 #include "OutFile.h"
 #include "Writer.h"
 #include <vector>
 int main(int argc, char const *argv[]) {
-  InFile file(argv[4]);
+  ProtectedInFile file(argv[4]);
   OutFile outFile(argv[5]);
   int numbsPerBlock = atoi(argv[1]);
   int amountOfThreads = atoi(argv[2]);

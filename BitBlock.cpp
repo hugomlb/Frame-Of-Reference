@@ -10,17 +10,8 @@
 #define REFERENCE_SIZE 4
 
 BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
-  if (maxNumb == 0) {
-    bitsPerNumb = 0;
-  } else {
-    bitsPerNumb = calculateBitsPerNumb(maxNumb);
-  }
-  int amountOfBits = amountOfNumbs * bitsPerNumb;
-  int bytesNeeded = amountOfBits / 8;
-  if ((amountOfBits % 8) != 0) {
-    bytesNeeded ++;
-  }
-  bytes.resize(bytesNeeded);
+  bitsPerNumb = calculateBitsPerNumb(maxNumb);
+  bytes.resize(calculateBytesNeeded(amountOfNumbs));
   iterator = bytes.begin();
   inBit = FIRST_BIT;
   reference = aReference;
@@ -53,19 +44,32 @@ BitBlock& BitBlock::operator=(BitBlock &&other) {
   return *this;
 }
 
+int BitBlock::calculateBytesNeeded(int amountOfNumbs) {
+  int amountOfBits = amountOfNumbs * bitsPerNumb;
+  int bytesNeeded = amountOfBits / 8;
+  if ((amountOfBits % 8) != 0) {
+    bytesNeeded ++;
+  }
+  return bytesNeeded;
+}
+
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
   std::bitset<MAX_BIT_QUANTITY>  bits(maxNumb);
   int inBit = 0;
   unsigned index = MAX_BIT_QUANTITY;
-  while (inBit == 0 && index > 0) {
-    index --;
-    inBit = bits[index];
+  if (maxNumb != 0) {
+    while (inBit == 0 && index > 0) {
+      index --;
+      inBit = bits[index];
+    }
+    index ++;
+  } else {
+    index = 0;
   }
-  index ++;
   return index;
 }
 
-void BitBlock::addBitsFrom(unsigned numbToAdd) {
+void BitBlock::addNumb(unsigned numbToAdd) {
   std::bitset<MAX_BIT_QUANTITY> source(numbToAdd);
   int amountOfBits = bitsPerNumb;
   while (0 < amountOfBits) {
@@ -73,10 +77,6 @@ void BitBlock::addBitsFrom(unsigned numbToAdd) {
     nextBit();
     amountOfBits --;
   }
-}
-
-void BitBlock::addNumb(unsigned numbToAdd) {
-  addBitsFrom(numbToAdd);
 }
 
 void BitBlock::writeTo(OutFile* outFile) {

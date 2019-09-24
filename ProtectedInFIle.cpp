@@ -1,4 +1,4 @@
-#include "InFile.h"
+#include "ProtectedInFile.h"
 #include <iostream>
 #include <cstdint>
 #include <cstring>
@@ -9,7 +9,7 @@
 #define NUM_SIZE 4
 #define CIN '-'
 
-InFile::InFile(const char* filename) {
+ProtectedInFile::ProtectedInFile(const char* filename) {
   if (*filename == CIN) {
     file = &std::cin;
   } else {
@@ -22,7 +22,7 @@ InFile::InFile(const char* filename) {
   file -> seekg(0, file -> beg);
 }
 
-int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
+int ProtectedInFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
     int position) {
   mutex.lock();
   file -> seekg(position, file -> beg);
@@ -41,7 +41,7 @@ int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
   return  fileState;
 }
 
-int InFile::readNumberTo(Block *block) {
+int ProtectedInFile::readNumberTo(Block *block) {
   int fileState = isEOF();
   if (fileState == OK) {
     char* num = new char [NUM_SIZE];
@@ -60,7 +60,7 @@ int InFile::readNumberTo(Block *block) {
   return fileState;
 }
 
-int InFile::isEOF() {
+int ProtectedInFile::isEOF() {
   int returnValue = OK;
   if (file -> eof()) {
     file -> clear();
@@ -69,7 +69,7 @@ int InFile::isEOF() {
   return returnValue;
 }
 
-InFile::~InFile(){
+ProtectedInFile::~ProtectedInFile(){
   if (fd.is_open()) {
     fd.close();
   }

@@ -3,8 +3,9 @@
 #define OK 0
 #define NUMB_SIZE 4
 
-FileCompressor::FileCompressor(InFile* in, ProtectedBlockQueue* queue,
-    int numbsPerBlock, int numbOfThreads, int myNumb):block(numbsPerBlock) {
+FileCompressor::FileCompressor(ProtectedInFile* in, ProtectedBitBlockQueue*
+    queue, int numbsPerBlock, int numbOfThreads, int myNumb)
+    :block(numbsPerBlock) {
   inFile = in;
   this -> queue = queue;
   this -> numbsPerBlock = numbsPerBlock;

@@ -7,7 +7,7 @@
 #include "BitBlock.h"
 #include "OutFile.h"
 
-class ProtectedBlockQueue {
+class ProtectedBitBlockQueue {
   private:
     std::queue<BitBlock> queue;
     std::mutex m;
@@ -18,9 +18,9 @@ class ProtectedBlockQueue {
     bool popAvailable;
 
   public:
-    explicit ProtectedBlockQueue(int maxAmountOfElements);
+    explicit ProtectedBitBlockQueue(int maxAmountOfElements);
 
-    ProtectedBlockQueue(const ProtectedBlockQueue& other);
+  ProtectedBitBlockQueue(const ProtectedBitBlockQueue& other);
 
     void push(BitBlock bitBlock);
 
@@ -30,7 +30,7 @@ class ProtectedBlockQueue {
 
     void done(bool processState);
 
-    ~ProtectedBlockQueue();
+    ~ProtectedBitBlockQueue();
 };
 
 

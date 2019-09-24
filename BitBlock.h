@@ -4,16 +4,18 @@
 #include <vector>
 class BitBlock {
   private:
-    unsigned int reference;
+    unsigned reference;
     std::vector<char>::iterator iterator;
     std::vector<char> bytes;
     char aux;
     int inBit;
     bool validBlock;
-    unsigned int bitsPerNumb;
+    unsigned bitsPerNumb;
 
     void nextBit();
-    unsigned int calculateBitsPerNumb(unsigned maxNumb);
+    unsigned calculateBitsPerNumb(unsigned maxNumb);
+    int calculateBytesNeeded(int amountOfNumbs);
+
 
   public:
     explicit BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs);
@@ -23,8 +25,6 @@ class BitBlock {
     BitBlock(BitBlock&& other);
 
     BitBlock&operator=(BitBlock&& other);
-
-    void addBitsFrom(unsigned numbToAdd);
 
     void addNumb(unsigned numbToAdd);
 
