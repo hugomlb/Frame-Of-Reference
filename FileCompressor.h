@@ -1,7 +1,7 @@
-#ifndef _FILE_COMPRESOR_H_
-#define  _FILE_COMPRESOR_H_
+#ifndef _FILE_COMPRESSOR_H_
+#define  _FILE_COMPRESSOR_H_
 #include "InFile.h"
-#include "ProtectedBlockQueue.h"
+#include "ProtectedBitBlockQueue.h"
 #include "Block.h"
 #include "Thread.h"
 class FileCompressor : public Thread {

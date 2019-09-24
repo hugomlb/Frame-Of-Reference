@@ -22,7 +22,7 @@ class ProtectedBlockQueue {
 
     ProtectedBlockQueue(const ProtectedBlockQueue& other);
 
-    void push(BitBlock bitBlock, bool processState);
+    void push(BitBlock bitBlock);
 
     BitBlock pop();
 

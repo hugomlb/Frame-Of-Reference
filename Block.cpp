@@ -1,6 +1,6 @@
 #include "Block.h"
 #include "BitBlock.h"
-#include "ProtectedBlockQueue.h"
+#include "ProtectedBitBlockQueue.h"
 #define MIN_VALUE 0
 #define MAX_VALUE 0xffffffff
 
@@ -49,7 +49,7 @@ void Block::compressTo(ProtectedBlockQueue *queue) {
     bitBlock.addNumb(*iterator - minNumb);
   }
   bitBlock.addPadding();
-  queue -> push(std::move(bitBlock), false);
+  queue -> push(std::move(bitBlock));
 }
 
 Block::~Block() {

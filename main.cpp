@@ -1,7 +1,6 @@
 #include "InFile.h"
 #include "FileCompressor.h"
 #include "OutFile.h"
-#include "ProtectedBlockQueue.h"
 #include "Writer.h"
 #include <vector>
 int main(int argc, char const *argv[]) {

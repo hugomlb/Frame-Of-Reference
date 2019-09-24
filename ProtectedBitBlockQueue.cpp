@@ -1,4 +1,4 @@
-#include "ProtectedBlockQueue.h"
+#include "ProtectedBitBlockQueue.h"
 #include "Lock.h"
 
 ProtectedBlockQueue::ProtectedBlockQueue(int maxAmountOfElements) {
@@ -14,13 +14,13 @@ ProtectedBlockQueue::ProtectedBlockQueue(const ProtectedBlockQueue &other):
   this -> popAvailable = other.popAvailable;
 }
 
-void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
+void ProtectedBlockQueue::push(BitBlock bitBlock) {
   std::unique_lock<std::mutex> lock(m);
   while (queue.size() >= maxElements) {
     pushCondition.wait(lock);
   }
   queue.push(std::move(bitBlock));
-  done(processState);
+  done(false);
 }
 
 BitBlock ProtectedBlockQueue::pop() {

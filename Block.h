@@ -2,7 +2,7 @@
 #define  _BLOCK_H_
 #include <vector>
 #include "BitBlock.h"
-#include "ProtectedBlockQueue.h"
+#include "ProtectedBitBlockQueue.h"
 #include "OutFile.h"
 
 class Block {

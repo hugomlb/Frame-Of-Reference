@@ -2,12 +2,12 @@
 #define _WRITER_H_
 
 #include <vector>
-#include "ProtectedBlockQueue.h"
+#include "ProtectedBitBlockQueue.h"
 #include "OutFile.h"
 
 class Writer {
 private:
-  std::vector<ProtectedBlockQueue*> vectorOfQueue;
+  std::vector<ProtectedBlockQueue> vectorOfQueue;
   OutFile* outFile;
   unsigned currentQueue;
   int amountOfQueues;
