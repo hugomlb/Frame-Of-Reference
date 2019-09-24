@@ -4,7 +4,6 @@ ProtectedBlockQueue::ProtectedBlockQueue(int maxAmountOfElements) {
   maxElements = maxAmountOfElements;
   donePushing = false;
   popAvailable = false;
-  popFinish = false;
 }
 
 ProtectedBlockQueue::ProtectedBlockQueue(const ProtectedBlockQueue &other):
@@ -25,8 +24,8 @@ void ProtectedBlockQueue::push(BitBlock bitBlock, bool processState) {
 
 BitBlock ProtectedBlockQueue::pop() {
   std::unique_lock<std::mutex> lock(m);
-  BitBlock bitBlock(0, 0, 0); //chequear lo que dijo Matias **********************
-  while (!popAvailable && !popFinish) {
+  BitBlock bitBlock(0, 0, 0);
+  while (!popAvailable && !donePushing) {
     popCondition.wait(lock);
   }
   if (queue.size() > 0) {
@@ -34,19 +33,16 @@ BitBlock ProtectedBlockQueue::pop() {
     queue.pop();
     popAvailable = false;
   }
-  if (donePushing && queue.size() == 0){
-    popFinish = true;
-  }
   pushCondition.notify_all();
   return std::move(bitBlock);
 }
 
 bool ProtectedBlockQueue::donePoping() {
-/*  bool answer = false;
-  if (donePushing && !popAvailable) {
+  bool answer = false;
+  if (donePushing && queue.size() == 0) {
     answer = true;
-  }*/
-  return  popFinish;
+  }
+  return  answer;
 }
 
 void ProtectedBlockQueue::done(bool processState) {

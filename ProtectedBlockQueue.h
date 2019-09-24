@@ -15,7 +15,6 @@ class ProtectedBlockQueue {
     std::condition_variable pushCondition;
     unsigned maxElements;
     bool donePushing;
-    bool popFinish;
     bool popAvailable;
 
   public:
