@@ -26,7 +26,8 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   reference = aReference;
 }
 
-BitBlock::BitBlock(BitBlock &&other): iterator(std::move(other.iterator)), bytes(std::move(other.bytes)) {
+BitBlock::BitBlock(BitBlock &&other): iterator(std::move(other.iterator)),
+    bytes(std::move(other.bytes)) {
   this -> reference = other.reference;
   this -> aux = other.aux;
   this -> bitsPerNumb = other.bitsPerNumb;

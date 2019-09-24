@@ -3,7 +3,7 @@
 #include "OutFile.h"
 #include "ProtectedBlockQueue.h"
 #include "Writer.h"
-
+#include <vector>
 int main(int argc, char const *argv[]) {
   InFile file(argv[4]);
   OutFile outFile(argv[5]);

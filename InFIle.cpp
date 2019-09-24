@@ -22,7 +22,8 @@ InFile::InFile(const char* filename) {
   file -> seekg(0, file -> beg);
 }
 
-int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) {
+int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
+    int position) {
   Lock aLock(mutex);
   file -> seekg(position, file -> beg);
   int fileState = OK;

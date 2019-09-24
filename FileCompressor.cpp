@@ -14,10 +14,10 @@ FileCompressor::FileCompressor(InFile* in, ProtectedBlockQueue* queue,
 
 void FileCompressor::run() {
   int fileState = OK;
-  int position = (numbsPerBlock * NUMB_SIZE * myNumb);
+  int pos = (numbsPerBlock * NUMB_SIZE * myNumb);
   while (fileState == OK) {
-    fileState = inFile -> readNumbsToStartingAt(numbsPerBlock, &block, position);
-    position += (numbsPerBlock * NUMB_SIZE * numbOfThreads);
+    fileState = inFile -> readNumbsToStartingAt(numbsPerBlock, &block, pos);
+    pos += (numbsPerBlock * NUMB_SIZE * numbOfThreads);
     if (!(block.hasSpace())) {
       block.compressTo(queue);
       block.reset();

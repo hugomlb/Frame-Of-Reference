@@ -10,6 +10,5 @@ class Lock {
     explicit Lock(std::mutex& aMutex);
 
     ~Lock();
-
 };
 #endif
