@@ -19,7 +19,7 @@ void FileCompressor::run() {
     fileState = inFile -> readNumbsToStartingAt(numbsPerBlock, &block, position);
     position += (numbsPerBlock * NUMB_SIZE * numbOfThreads);
     if (!(block.hasSpace())) {
-      BitBlock bitBlock = block.compressTo(queue);
+      block.compressTo(queue);
       block.reset();
     }
   }

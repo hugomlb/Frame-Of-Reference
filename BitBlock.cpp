@@ -5,6 +5,9 @@
 #include <netinet/in.h>
 #include <bitset>
 #define MAX_BIT_QUANTITY 32
+#define FIRST_BIT 7
+#define LAST_BIT 0
+#define REFERENCE_SIZE 4
 
 BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   if (maxNumb == 0) {
@@ -19,17 +22,28 @@ BitBlock::BitBlock(unsigned aReference, unsigned maxNumb, int amountOfNumbs) {
   }
   bytes.resize(bytesNeeded);
   iterator = bytes.begin();
-  inBit = 7;
+  inBit = FIRST_BIT;
   reference = aReference;
 }
 
-BitBlock::BitBlock(BitBlock &&other) {
-  this -> bytes = std::move(other.bytes);
-  this -> iterator = std::move(other.iterator);
+BitBlock::BitBlock(BitBlock &&other): iterator(std::move(other.iterator)), bytes(std::move(other.bytes)) {
   this -> reference = other.reference;
   this -> aux = other.aux;
   this -> bitsPerNumb = other.bitsPerNumb;
   this -> inBit = other.inBit;
+}
+
+BitBlock& BitBlock::operator=(BitBlock &&other) {
+  if (this == &other) {
+    return  *this;
+  }
+  this -> iterator = std::move(other.iterator);
+  this -> bytes = std::move(other.bytes);
+  this -> reference = other.reference;
+  this -> aux = other.aux;
+  this -> bitsPerNumb = other.bitsPerNumb;
+  this -> inBit = other.inBit;
+  return *this;
 }
 
 unsigned int BitBlock::calculateBitsPerNumb(unsigned maxNumb) {
@@ -60,7 +74,7 @@ void BitBlock::addNumb(unsigned numbToAdd) {
 
 void BitBlock::writeTo(OutFile* outFile) {
   reference = ntohl(reference);
-  outFile -> write((char*) &reference, 4);
+  outFile -> write((char*) &reference, REFERENCE_SIZE);
   outFile -> write((char*) &bitsPerNumb, 1);
   for (iterator = bytes.begin(); iterator < bytes.end(); iterator ++) {
     outFile -> write(&(*iterator), 1);
@@ -68,7 +82,7 @@ void BitBlock::writeTo(OutFile* outFile) {
 }
 
 void BitBlock::addPadding() {
-  if (iterator != bytes.end() && inBit != 7) {
+  if (iterator != bytes.end() && inBit != FIRST_BIT) {
     while  (inBit >= 0) {
       aux = (aux &~ (1UL << inBit)) | (0 << inBit);
       inBit --;
@@ -78,8 +92,8 @@ void BitBlock::addPadding() {
 }
 
 void BitBlock::nextBit() {
-  if (inBit == 0) {
-    inBit = 7;
+  if (inBit == LAST_BIT) {
+    inBit = FIRST_BIT;
     if (iterator !=  bytes.end()){
       *iterator = aux;
       iterator ++;

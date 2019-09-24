@@ -21,6 +21,8 @@ class BitBlock {
 
     BitBlock(BitBlock&& other);
 
+    BitBlock&operator=(BitBlock&& other);
+
     void addBitsFrom(unsigned numbToAdd);
 
     void addNumb(unsigned numbToAdd);

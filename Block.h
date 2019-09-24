@@ -27,7 +27,7 @@ class Block {
 
     bool hasSpace();
 
-    BitBlock compressTo(ProtectedBlockQueue* queue);
+    void compressTo(ProtectedBlockQueue* queue);
 
     ~Block();
 };

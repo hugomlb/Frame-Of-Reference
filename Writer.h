@@ -6,17 +6,21 @@
 #include "OutFile.h"
 
 class Writer {
-  private:
-    std::vector<ProtectedBlockQueue>* vectorOfQueue;
-    OutFile* outFile;
-    unsigned currentQueue;
-  public:
-    explicit Writer(std::vector<ProtectedBlockQueue>* queueVector,
-        OutFile* outFile);
+private:
+  std::vector<ProtectedBlockQueue*> vectorOfQueue;
+  OutFile* outFile;
+  unsigned currentQueue;
+  int amountOfQueues;
+public:
+  explicit Writer(OutFile* outFile, int maxElements, int amountOfQueues);
 
-    void write();
+  void write();
 
-    void nextQueue();
+  ProtectedBlockQueue* getQueueFor(int thread);
+
+  void nextQueue();
+
+  ~Writer();
 };
 
 

@@ -6,9 +6,11 @@
 #include "Lock.h"
 #define END_OF_FILE -1
 #define OK 0
+#define NUM_SIZE 4
+#define CIN '-'
 
 InFile::InFile(const char* filename) {
-  if (*filename == '-') {
+  if (*filename == CIN) {
     file = &std::cin;
   } else {
     fd = std::ifstream(filename, std::ios::in|std::ios::binary);
@@ -40,10 +42,10 @@ int InFile::readNumbsToStartingAt(int amountOfNumb, Block *block, int position) 
 int InFile::readNumberTo(Block *block) {
   int fileState = isEOF();
   if (fileState == OK) {
-    char* num = new char [4];
-    file -> read(num, 4);
+    char* num = new char [NUM_SIZE];
+    file -> read(num, NUM_SIZE);
     uint32_t number;
-    memcpy(&number, num, sizeof(char) * 4);
+    memcpy(&number, num, sizeof(char) * NUM_SIZE);
     delete[] num;
     number = ntohl(number);
     fileState = isEOF();
@@ -59,11 +61,14 @@ int InFile::readNumberTo(Block *block) {
 int InFile::isEOF() {
   int returnValue = OK;
   if (file -> eof()) {
+    file -> clear();
     returnValue = END_OF_FILE;
   }
   return returnValue;
 }
 
 InFile::~InFile(){
-  fd.close();
+  if (fd.is_open()) {
+    fd.close();
+  }
 }
