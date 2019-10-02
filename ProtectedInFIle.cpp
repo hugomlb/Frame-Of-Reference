@@ -70,7 +70,4 @@ int ProtectedInFile::isEOF() {
 }
 
 ProtectedInFile::~ProtectedInFile(){
-  if (fd.is_open()) {
-    fd.close();
-  }
 }
