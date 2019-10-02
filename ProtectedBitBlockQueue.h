@@ -17,6 +17,8 @@ class ProtectedBitBlockQueue {
     bool donePushing;
     bool popAvailable;
 
+    void updatePopAvailable();
+
   public:
     explicit ProtectedBitBlockQueue(int maxAmountOfElements);
 
