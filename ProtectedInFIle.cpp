@@ -1,9 +1,7 @@
 #include "ProtectedInFile.h"
 #include <iostream>
 #include <cstdint>
-#include <cstring>
 #include <netinet/in.h>
-#include "Lock.h"
 #define END_OF_FILE -1
 #define OK 0
 #define NUM_SIZE 4
@@ -22,9 +20,8 @@ ProtectedInFile::ProtectedInFile(const char* filename) {
   file -> seekg(0, file -> beg);
 }
 
-int ProtectedInFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
-    int position) {
-  mutex.lock();
+int ProtectedInFile::readNumbsToStartingAt(Block *block, int position) {
+  std::lock_guard<std::mutex> lock(mutex);
   file -> seekg(position, file -> beg);
   int fileState = OK;
   if (file -> tellg() >= size) {
@@ -37,19 +34,15 @@ int ProtectedInFile::readNumbsToStartingAt(int amountOfNumb, Block *block,
   while (block -> hasSpace() && wasRead) {
     block -> addNumber(lastRead);
   }
-  mutex.unlock();
   return  fileState;
 }
 
 int ProtectedInFile::readNumberTo(Block *block) {
   int fileState = isEOF();
   if (fileState == OK) {
-    char* num = new char [NUM_SIZE];
-    file -> read(num, NUM_SIZE);
     uint32_t number;
-    memcpy(&number, num, sizeof(char) * NUM_SIZE);
-    delete[] num;
-    number = ntohl(number);
+    file -> read((char*) &number, NUM_SIZE);
+    number = be32toh(number);
     fileState = isEOF();
     if (fileState == OK) {
       lastRead = number;

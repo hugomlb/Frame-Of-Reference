@@ -20,7 +20,7 @@ class ProtectedInFile {
   public:
     explicit ProtectedInFile(const char* filename);
 
-    int readNumbsToStartingAt(int amountOfNumb, Block* block, int position);
+    int readNumbsToStartingAt(Block *block, int position);
 
     ~ProtectedInFile();
 };

@@ -29,7 +29,7 @@ BitBlock ProtectedBitBlockQueue::pop() {
   while (!popAvailable && !donePushing) {
     popCondition.wait(lock);
   }
-  if (queue.size() > 0) {
+  if (!queue.empty()) {
     bitBlock = std::move(queue.front());
     queue.pop();
     popAvailable = false;
