@@ -6,9 +6,9 @@
 int main(int argc, char const *argv[]) {
   ProtectedInFile file(argv[4]);
   OutFile outFile(argv[5]);
-  int numbsPerBlock = atoi(argv[1]);
-  int amountOfThreads = atoi(argv[2]);
-  int elementsPerQueue = atoi(argv[3]);
+  int numbsPerBlock = std::stoi(argv[1]);
+  int amountOfThreads = std::stoi(argv[2]);
+  int elementsPerQueue = std::stoi(argv[3]);
   Writer writer(&outFile, elementsPerQueue, amountOfThreads);
   std::vector<FileCompressor*> threads;
   for (int i = 0; i < amountOfThreads; i++) {

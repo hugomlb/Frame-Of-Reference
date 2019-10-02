@@ -16,7 +16,4 @@ void OutFile::write(char *buf, int bytesToWrite) {
 }
 
 OutFile::~OutFile() {
-  if (fd.is_open()) {
-    fd.close();
-  }
 }

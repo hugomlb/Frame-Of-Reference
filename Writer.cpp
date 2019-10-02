@@ -3,7 +3,7 @@
 
 Writer::Writer(OutFile *outFile, int maxElements, int amountOfQueues) {
   for (int i = 0; i < amountOfQueues; i++){
-    vectorOfQueues.push_back(ProtectedBitBlockQueue(maxElements));
+    vectorOfQueues.emplace_back(maxElements);
   }
   this -> outFile = outFile;
   this -> amountOfQueues = amountOfQueues;

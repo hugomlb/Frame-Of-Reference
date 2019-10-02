@@ -1,9 +1,7 @@
 #include "BitBlock.h"
-#include <iostream>
 #include <bitset>
 #include "OutFile.h"
 #include <netinet/in.h>
-#include <bitset>
 #define MAX_BIT_QUANTITY 32
 #define FIRST_BIT 7
 #define LAST_BIT 0
@@ -81,7 +79,7 @@ void BitBlock::addNumb(unsigned numbToAdd) {
 
 void BitBlock::writeTo(OutFile* outFile) {
   if (validBlock) {
-    reference = ntohl(reference);
+    reference = htobe32(reference);
     outFile -> write((char*) &reference, REFERENCE_SIZE);
     outFile -> write((char*) &bitsPerNumb, 1);
     for (iterator = bytes.begin(); iterator < bytes.end(); iterator ++) {
